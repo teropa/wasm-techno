@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <script>
+    async function start() {
+      let context = new AudioContext({ sampleRate: 48000 });
+      await context.resume();
+      let wasmCode = await fetch("techno.wasm").then((r) => r.arrayBuffer());
+      await context.audioWorklet.addModule("TechnoProcessor.js");
+      let technoWorkletNode = new AudioWorkletNode(
+        context,
+        "techno-processor",
+        {
+          outputChannelCount: [2],
+        }
+      );
+      technoWorkletNode.port.postMessage({ wasmCode });
+      technoWorkletNode.connect(context.destination);
+    }
+  </script>
+  <button onclick="start()">Start</button>
+</html>
