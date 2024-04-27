@@ -1,6 +1,6 @@
 #include <math.h>
 
-static float outputBuffer[256];
+static float outputBuffer[128];
 
 float phase = 0.0;
 
@@ -14,7 +14,7 @@ float* makeSomeTechno() {
     float val = sinf(phase) * 0.2;
     phase += phaseIncrement;
     outputBuffer[i] = val;
-    outputBuffer[i + 128] = val;
   }
+  
   return outputBuffer;
 }
