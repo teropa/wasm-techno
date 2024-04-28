@@ -10,7 +10,7 @@ static float outputBuffer[128];
 unsigned long long tSamples = 0;
 double kickPhase = 0.0, bassPhase = 0.0;
 
-int pattern[16] = {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0};
+int pattern[16] = {0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0};
 
 double saw4f(double phase) {
   return sinf(phase) +
@@ -37,9 +37,9 @@ float* makeSomeTechno() {
 
     double bassPitch = 50.0;
     bassPhase = fmod(bassPhase + SAMPLE_DURATION * TWO_PI * bassPitch, TWO_PI);
-    int downbeat = ((int)tSixteenths) % 4 == 0;
-    double bassEnv = downbeat ? 0.0 : pow(2.0, -(4.0 * tInSixteenth + 0.01 / tInSixteenth)) * 0.4;
-    double bass = tanh(sinf(bassPhase) * 1.5) * bassEnv;
+    double bassEnv = (1.0 - pow(2.0, -(1.1 * tInBeat + 0.01 / tInBeat))) * 0.2;
+    double bassEnv2 = pow(2.0, -(6.0 * tInSixteenth + 0.01 / tInSixteenth)) * 0.1;
+    double bass = tanh(sinf(bassPhase) * 1.5) * (bassEnv + bassEnv2);
 
     int chordHit = pattern[sixteenth];
     double chordRootPitch = bassPitch * 4;
@@ -47,8 +47,8 @@ float* makeSomeTechno() {
     float chord1 = saw4f(chordRootPhase);
     float chord2 = saw4f(chordRootPhase * 6/5);
     float chord3 = saw4f(chordRootPhase * 3/2);
-    double chordEnv = chordHit ? 1.0 - tInSixteenth : 0.0;
-    double chordOut = (chord1 + chord2 + chord3) * chordEnv * 0.1;
+    double chordEnv = chordHit ? pow(2.0, -(3.0 * tInSixteenth + 0.01 / tInSixteenth)) : 0.0;
+    double chordOut = (chord1 + chord2 + chord3) * chordEnv * 0.15;
 
     outputBuffer[i] = kick + bass + chordOut;
   }
