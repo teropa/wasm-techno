@@ -12,11 +12,22 @@ double kickPhase = 0.0, bassPhase = 0.0;
 
 int pattern[16] = {0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0};
 
-double saw4f(double phase) {
+float delayLine[48000] = {0};
+int delayIndex = 0;
+float processDelay(float input, float feedback, float delayTime) {
+  delayLine[delayIndex] = input + delayLine[delayIndex] * feedback;
+  delayIndex = (delayIndex + 1) % (int)(delayTime * SAMPLERATE);
+  return delayLine[delayIndex];
+}
+
+double saw7f(double phase) {
   return sinf(phase) +
     sinf(phase * 2.0) / 2.0 +
     sinf(phase * 3.0) / 3.0 +
-    sinf(phase * 4.0) / 4.0;
+    sinf(phase * 4.0) / 4.0 +
+    sinf(phase * 5.0) / 5.0 +
+    sinf(phase * 6.0) / 6.0 +
+    sinf(phase * 7.0) / 7.0;
 }
 
 float* makeSomeTechno() {
@@ -44,13 +55,14 @@ float* makeSomeTechno() {
     int chordHit = pattern[sixteenth];
     double chordRootPitch = bassPitch * 4;
     double chordRootPhase = chordRootPitch * 2.0 * M_PI * tSeconds * (bar % 4 < 2 ? 1.0 : 2.0/3);
-    float chord1 = saw4f(chordRootPhase);
-    float chord2 = saw4f(chordRootPhase * 6/5);
-    float chord3 = saw4f(chordRootPhase * 3/2);
-    double chordEnv = chordHit ? pow(2.0, -(3.0 * tInSixteenth + 0.01 / tInSixteenth)) : 0.0;
-    double chordOut = (chord1 + chord2 + chord3) * chordEnv * 0.15;
+    float chord1 = saw7f(chordRootPhase);
+    float chord2 = saw7f(chordRootPhase * 6.0 / 5.0);
+    float chord3 = saw7f(chordRootPhase * 3.0 / 2.0);
+    double chordEnv = chordHit ? pow(2.0, -(8.0 * tInSixteenth + 0.01 / tInSixteenth)) : 0.0;
+    double chordOut = (chord1 + chord2 + chord3) * chordEnv * 0.1;
+    chordOut = chordOut + processDelay(chordOut, 0.8, 0.375) * 0.1;
 
-    outputBuffer[i] = kick + bass + chordOut;
+    outputBuffer[i] = tanh(kick + bass + chordOut);
   }
 
   return outputBuffer;

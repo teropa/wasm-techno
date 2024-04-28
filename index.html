@@ -14,6 +14,18 @@
       technoWorkletNode.port.postMessage({ wasmCode });
       technoWorkletNode.connect(context.destination);
 
+      // let impulse = new Float32Array(96000);
+      // for (let i = 0; i < impulse.length; i++) {
+      //   let t = i / impulse.length;
+      //   impulse[i] = Math.random() * 2 ** (-t * 3) * 0.1;
+      // }
+      // let impulseBuffer = context.createBuffer(1, impulse.length, 48000);
+      // impulseBuffer.getChannelData(0).set(impulse);
+      // let reverb = context.createConvolver();
+      // reverb.buffer = impulseBuffer;
+      // reverb.connect(context.destination);
+      // technoWorkletNode.connect(reverb);
+
       let weq8 = new WEQ8Runtime(context);
       technoWorkletNode.connect(weq8.input);
       document.querySelector("weq8-ui").runtime = weq8;
