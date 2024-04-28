@@ -7,21 +7,26 @@
 static float outputBuffer[128];
 
 unsigned long long tSamples = 0;
-float kickPhase = 0.0;
+double kickPhase = 0.0;
 
 float* makeSomeTechno() {
   for (unsigned char i = 0; i < 128; i++) {
-    float tSeconds = tSamples++ * SAMPLE_DURATION;
-    float tBeats = tSeconds * 2.0;
-    float tInBeat = fmodf(tBeats, 1.0);
+    double tSeconds = tSamples++ * SAMPLE_DURATION;
+    double tBeats = tSeconds * 2.0;
+    double tInBeat = fmod(tBeats, 1.0);
+    double tSixteenths = tBeats * 4.0;
+    double tInSixteenth = fmod(tSixteenths, 1.0);
 
-    float kickPitchEnv = powf(1.0 - tInBeat, 20.0);
-    float kickPitch = 80.0 + 400.0 * kickPitchEnv;
+    double kickPitchEnv = powf(1.0 - tInBeat, 50.0);
+    double kickPitch = 50.0 + 900.0 * kickPitchEnv;
     kickPhase = fmodf(kickPhase + SAMPLE_DURATION * TWO_PI * kickPitch, TWO_PI);
-    float kickEnv = 0.2 * powf(1.0 - tInBeat, 2.0);
-    float val = sinf(kickPhase) * kickEnv;
+    double kickEnv = powf(1.0 - tInBeat, 3.0) * 0.15;
+    double kick = sinf(kickPhase) * kickEnv;
 
-    outputBuffer[i] = val;
+    double bassEnv = ((int)tSixteenths) % 4 == 0 ? 0.0 : pow(2.0, -(4.0 * tInSixteenth + 0.01 / tInSixteenth)) * 0.2;
+    double bass = tanh(sinf(tSeconds * TWO_PI * 75.0) * 2.5) * bassEnv;
+
+    outputBuffer[i] = kick + bass;
   }
 
   return outputBuffer;
