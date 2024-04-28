@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
-  <script>
+  <button id="start">Start</button>
+  <weq8-ui></weq8-ui>
+  <script type="module">
+    import { WEQ8Runtime } from "https://cdn.skypack.dev/weq8";
+    import "https://cdn.skypack.dev/weq8/ui";
     async function start() {
       let context = new AudioContext({ sampleRate: 48000 });
       await context.resume();
@@ -9,7 +13,13 @@
       let technoWorkletNode = new AudioWorkletNode(context, "techno-processor");
       technoWorkletNode.port.postMessage({ wasmCode });
       technoWorkletNode.connect(context.destination);
+
+      let weq8 = new WEQ8Runtime(context);
+      technoWorkletNode.connect(weq8.input);
+      document.querySelector("weq8-ui").runtime = weq8;
     }
+    document
+      .getElementById("start")
+      .addEventListener("click", start, { once: true });
   </script>
-  <button onclick="start()">Start</button>
 </html>
