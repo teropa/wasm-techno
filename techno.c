@@ -1,7 +1,7 @@
 #include <math.h>
 
-#define SR 48000.0
-#define SAMPLE_DURATION 1.0 / SR
+#define SAMPLERATE 48000.0
+#define SAMPLE_DURATION 1.0 / SAMPLERATE
 #define TWO_PI 2.0 * M_PI
 
 static float outputBuffer[128];
