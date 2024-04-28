@@ -1,4 +1,5 @@
 #include <math.h>
+#include <stdlib.h>
 
 #define SAMPLERATE 48000.0
 #define SAMPLE_DURATION 1.0 / SAMPLERATE
@@ -9,17 +10,28 @@ static float outputBuffer[128];
 unsigned long long tSamples = 0;
 double kickPhase = 0.0, bassPhase = 0.0;
 
+int pattern[16] = {1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0};
+
+double saw4f(double phase) {
+  return sinf(phase) +
+    sinf(phase * 2.0) / 2.0 +
+    sinf(phase * 3.0) / 3.0 +
+    sinf(phase * 4.0) / 4.0;
+}
+
 float* makeSomeTechno() {
   for (unsigned char i = 0; i < 128; i++) {
     double tSeconds = tSamples++ * SAMPLE_DURATION;
     double tBeats = tSeconds * 2.0; // 120 BPM
+    int bar = (int)tBeats / 4;
     double tInBeat = fmod(tBeats, 1.0);
     double tSixteenths = tBeats * 4.0;
+    int sixteenth = (int)tSixteenths % 16;
     double tInSixteenth = fmod(tSixteenths, 1.0);
 
     double kickPitchEnv = powf(1.0 - tInBeat, 50.0);
     double kickPitch = 50.0 + 900.0 * kickPitchEnv;
-    kickPhase = fmodf(kickPhase + SAMPLE_DURATION * TWO_PI * kickPitch, TWO_PI);
+    kickPhase = fmod(kickPhase + SAMPLE_DURATION * TWO_PI * kickPitch, TWO_PI);
     double kickEnv = powf(1.0 - tInBeat, 3.0) * 0.15;
     double kick = sinf(kickPhase) * kickEnv;
 
@@ -27,9 +39,18 @@ float* makeSomeTechno() {
     bassPhase = fmod(bassPhase + SAMPLE_DURATION * TWO_PI * bassPitch, TWO_PI);
     int downbeat = ((int)tSixteenths) % 4 == 0;
     double bassEnv = downbeat ? 0.0 : pow(2.0, -(4.0 * tInSixteenth + 0.01 / tInSixteenth)) * 0.4;
-    double bass = tanh(sinf(bassPhase) * 2.5) * bassEnv;
+    double bass = tanh(sinf(bassPhase) * 1.5) * bassEnv;
 
-    outputBuffer[i] = kick + bass;
+    int chordHit = pattern[sixteenth];
+    double chordRootPitch = bassPitch * 4;
+    double chordRootPhase = chordRootPitch * 2.0 * M_PI * tSeconds * (bar % 4 < 2 ? 1.0 : 2.0/3);
+    float chord1 = saw4f(chordRootPhase);
+    float chord2 = saw4f(chordRootPhase * 6/5);
+    float chord3 = saw4f(chordRootPhase * 3/2);
+    double chordEnv = chordHit ? 1.0 - tInSixteenth : 0.0;
+    double chordOut = (chord1 + chord2 + chord3) * chordEnv * 0.1;
+
+    outputBuffer[i] = kick + bass + chordOut;
   }
 
   return outputBuffer;
