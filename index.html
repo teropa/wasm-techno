@@ -6,28 +6,18 @@
     import { WEQ8Runtime } from "https://cdn.skypack.dev/weq8";
     import "https://cdn.skypack.dev/weq8/ui";
     async function start() {
-      let context = new AudioContext({ sampleRate: 48000 });
-      await context.resume();
+      let ctx = new AudioContext({ sampleRate: 48000 });
+      await ctx.resume();
+
+      await ctx.audioWorklet.addModule("TechnoProcessor.js");
+      let worklet = new AudioWorkletNode(ctx, "techno-processor");
+      worklet.connect(ctx.destination);
+
       let wasmCode = await fetch("techno.wasm").then((r) => r.arrayBuffer());
-      await context.audioWorklet.addModule("TechnoProcessor.js");
-      let technoWorkletNode = new AudioWorkletNode(context, "techno-processor");
-      technoWorkletNode.port.postMessage({ wasmCode });
-      technoWorkletNode.connect(context.destination);
+      worklet.port.postMessage({ wasmCode });
 
-      // let impulse = new Float32Array(96000);
-      // for (let i = 0; i < impulse.length; i++) {
-      //   let t = i / impulse.length;
-      //   impulse[i] = Math.random() * 2 ** (-t * 3) * 0.1;
-      // }
-      // let impulseBuffer = context.createBuffer(1, impulse.length, 48000);
-      // impulseBuffer.getChannelData(0).set(impulse);
-      // let reverb = context.createConvolver();
-      // reverb.buffer = impulseBuffer;
-      // reverb.connect(context.destination);
-      // technoWorkletNode.connect(reverb);
-
-      let weq8 = new WEQ8Runtime(context);
-      technoWorkletNode.connect(weq8.input);
+      let weq8 = new WEQ8Runtime(ctx);
+      worklet.connect(weq8.input);
       document.querySelector("weq8-ui").runtime = weq8;
     }
     document

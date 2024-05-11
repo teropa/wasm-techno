@@ -12,10 +12,9 @@ class TechnoProcessor extends AudioWorkletProcessor {
   }
 
   process(_inputs, outputs) {
-    if (this.wasm) {
-      let technoPtr = this.wasm.makeSomeTechno();
-      outputs[0][0].set(new Float32Array(this.mem, technoPtr, 128));
-    }
+    if (!this.wasm) return true;
+    let ptr = this.wasm.makeSomeTechno();
+    outputs[0][0].set(new Float32Array(this.mem, ptr, 128));
     return true;
   }
 }
