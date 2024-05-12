@@ -20,8 +20,8 @@ export const theme = myTheme;
 
 ```c 2:3 title="Sine Wave" subtitle="Duration of a sample"
 
-#define SAMPLERATE 48000.0
-#define SAMPLE_DUR 1.0 / SAMPLERATE
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
 
 float phasor(float phase, float freq) {
   phase += SAMPLE_DUR * freq;
@@ -29,13 +29,13 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
-float kickPhase = 0.0;
+float kickPhase = 0.0f;
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0;
+    float kickPitch = 200.0f;
     kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI) * 0.15;
+    float kick = sin(kickPhase * TWO_PI) * 0.15f;
     outputBuffer[i] = kick;
   }
   return outputBuffer;
@@ -45,8 +45,8 @@ float* makeSomeTechno() {
 
 ```c 5 title="Sine Wave" subtitle="Phasor between 0 and 1 at a given frequency"
 
-#define SAMPLERATE 48000.0
-#define SAMPLE_DUR 1.0 / SAMPLERATE
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
 
 float phasor(float phase, float freq) {
   phase += SAMPLE_DUR * freq;
@@ -54,13 +54,13 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
-float kickPhase = 0.0;
+float kickPhase = 0.0f;
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0;
+    float kickPitch = 200.0f;
     kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI) * 0.15;
+    float kick = sin(kickPhase * TWO_PI) * 0.15f;
     outputBuffer[i] = kick;
   }
   return outputBuffer;
@@ -70,8 +70,8 @@ float* makeSomeTechno() {
 
 ```c 6 title="Sine Wave" subtitle="Increment at every sample"
 
-#define SAMPLERATE 48000.0
-#define SAMPLE_DUR 1.0 / SAMPLERATE
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
 
 float phasor(float phase, float freq) {
   phase += SAMPLE_DUR * freq;
@@ -79,13 +79,13 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
-float kickPhase = 0.0;
+float kickPhase = 0.0f;
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0;
+    float kickPitch = 200.0f;
     kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI) * 0.15;
+    float kick = sin(kickPhase * TWO_PI) * 0.15f;
     outputBuffer[i] = kick;
   }
   return outputBuffer;
@@ -95,8 +95,8 @@ float* makeSomeTechno() {
 
 ```c 7 title="Sine Wave" subtitle="Keep between 0-1"
 
-#define SAMPLERATE 48000.0
-#define SAMPLE_DUR 1.0 / SAMPLERATE
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
 
 float phasor(float phase, float freq) {
   phase += SAMPLE_DUR * freq;
@@ -104,13 +104,13 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
-float kickPhase = 0.0;
+float kickPhase = 0.0f;
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0;
+    float kickPitch = 200.0f;
     kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI) * 0.15;
+    float kick = sin(kickPhase * TWO_PI) * 0.15f;
     outputBuffer[i] = kick;
   }
   return outputBuffer;
@@ -120,8 +120,8 @@ float* makeSomeTechno() {
 
 ```c 5:9 title="Sine Wave"
 
-#define SAMPLERATE 48000.0
-#define SAMPLE_DUR 1.0 / SAMPLERATE
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
 
 float phasor(float phase, float freq) {
   phase += SAMPLE_DUR * freq;
@@ -129,13 +129,13 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
-float kickPhase = 0.0;
+float kickPhase = 0.0f;
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0;
+    float kickPitch = 200.0f;
     kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI) * 0.15;
+    float kick = sin(kickPhase * TWO_PI) * 0.15f;
     outputBuffer[i] = kick;
   }
   return outputBuffer;
@@ -145,8 +145,8 @@ float* makeSomeTechno() {
 
 ```c 11,15:16 title="Sine Wave" subtitle="Accumulate phase at 200Hz"
 
-#define SAMPLERATE 48000.0
-#define SAMPLE_DUR 1.0 / SAMPLERATE
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
 
 float phasor(float phase, float freq) {
   phase += SAMPLE_DUR * freq;
@@ -154,13 +154,13 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
-float kickPhase = 0.0;
+float kickPhase = 0.0f;
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0;
+    float kickPitch = 200.0f;
     kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI) * 0.15;
+    float kick = sin(kickPhase * TWO_PI) * 0.15f;
     outputBuffer[i] = kick;
   }
   return outputBuffer;
@@ -170,8 +170,8 @@ float* makeSomeTechno() {
 
 ```c 17[18:40] title="Sine Wave" subtitle="Calculate sinusoid"
 
-#define SAMPLERATE 48000.0
-#define SAMPLE_DUR 1.0 / SAMPLERATE
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
 
 float phasor(float phase, float freq) {
   phase += SAMPLE_DUR * freq;
@@ -179,13 +179,13 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
-float kickPhase = 0.0;
+float kickPhase = 0.0f;
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0;
+    float kickPitch = 200.0f;
     kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI) * 0.15;
+    float kick = sin(kickPhase * TWO_PI) * 0.15f;
     outputBuffer[i] = kick;
   }
   return outputBuffer;
@@ -195,8 +195,8 @@ float* makeSomeTechno() {
 
 ```c 17[42:47],18 title="Sine Wave" subtitle="Make it less loud and output"
 
-#define SAMPLERATE 48000.0
-#define SAMPLE_DUR 1.0 / SAMPLERATE
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
 
 float phasor(float phase, float freq) {
   phase += SAMPLE_DUR * freq;
@@ -204,13 +204,13 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
-float kickPhase = 0.0;
+float kickPhase = 0.0f;
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0;
+    float kickPitch = 200.0f;
     kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI) * 0.15;
+    float kick = sin(kickPhase * TWO_PI) * 0.15f;
     outputBuffer[i] = kick;
   }
   return outputBuffer;
@@ -220,8 +220,8 @@ float* makeSomeTechno() {
 
 ```c title="Sine Wave"
 
-#define SAMPLERATE 48000.0
-#define SAMPLE_DUR 1.0 / SAMPLERATE
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
 
 float phasor(float phase, float freq) {
   phase += SAMPLE_DUR * freq;
@@ -229,13 +229,13 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
-float kickPhase = 0.0;
+float kickPhase = 0.0f;
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0;
+    float kickPitch = 200.0f;
     kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI) * 0.15;
+    float kick = sin(kickPhase * TWO_PI) * 0.15f;
     outputBuffer[i] = kick;
   }
   return outputBuffer;

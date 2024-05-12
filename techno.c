@@ -1,19 +1,19 @@
 #include <math.h>
 #include <stdlib.h>
 
-#define SAMPLERATE 48000.0
-#define SAMPLE_DUR 1.0 / SAMPLERATE
-#define TWO_PI     2.0 * M_PI
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define TWO_PI     6.283185307179586f
 
 float outputBuffer[128];
 
 unsigned long long tSamples = 0;
 
-float kickPhase   = 0.0,
-      bassPhase   = 0.0,
-      chordPhase1 = 0.0,
-      chordPhase2 = 0.0,
-      chordPhase3 = 0.0;
+float kickPhase   = 0.0f,
+      bassPhase   = 0.0f,
+      chordPhase1 = 0.0f,
+      chordPhase2 = 0.0f,
+      chordPhase3 = 0.0f;
 
 char pattern[16] = {
   0, 1, 0, 0,
@@ -29,16 +29,16 @@ float phasor(float phase, float freq) {
 }
 
 float env(float t, float amp, float exp) {
-  return powf(1.0 - t, exp) * amp;
+  return powf(1.0f - t, exp) * amp;
 }
 
 float saw6f(float phase) {
   return sinf(phase) +
-    sinf(phase * 2.0) / 2.0 +
-    sinf(phase * 3.0) / 3.0 +
-    sinf(phase * 4.0) / 4.0 +
-    sinf(phase * 5.0) / 5.0 +
-    sinf(phase * 6.0) / 6.0;
+    sinf(phase * 2.0f) / 2.0f +
+    sinf(phase * 3.0f) / 3.0f +
+    sinf(phase * 4.0f) / 4.0f +
+    sinf(phase * 5.0f) / 5.0f +
+    sinf(phase * 6.0f) / 6.0f;
 }
 
 
@@ -52,9 +52,9 @@ float processDelay(float input, float feedback, float delayTime) {
 
 float* step1Sine() {
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0;
+    float kickPitch = 200.0f;
     kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sinf(kickPhase * TWO_PI) * 0.15;
+    float kick = sinf(kickPhase * TWO_PI) * 0.15f;
     outputBuffer[i] = kick;
   }
   return outputBuffer;
@@ -63,36 +63,36 @@ float* step1Sine() {
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR;
-    float tBeats = tSeconds * 2.0; // 120 BPM
+    float tBeats = tSeconds * 2.0f; // 120 BPM
     int bar = (int)tBeats / 4;
     float tBeatFrac = tBeats - trunc(tBeats);
-    float tSixteenths = tBeats * 4.0;
+    float tSixteenths = tBeats * 4.0f;
     int sixteenth = (int)tSixteenths % 16;
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths);
 
-    float kickPitchEnv = env(tBeatFrac, 900.0, 50.0);
-    float kickPitch = 50.0 + kickPitchEnv;
+    float kickPitchEnv = env(tBeatFrac, 900.0f, 50.0f);
+    float kickPitch = 50.0f + kickPitchEnv;
     kickPhase = phasor(kickPhase, kickPitch);
-    float kickEnv = env(tBeatFrac, 0.15, 3.0);
+    float kickEnv = env(tBeatFrac, 0.15f, 3.0f);
     float kick = sinf(kickPhase * TWO_PI) * kickEnv;
 
-    float bassPitch = 50.0;
+    float bassPitch = 50.0f;
     bassPhase = phasor(bassPhase, bassPitch);
-    float bassEnv = 0.2 - env(tBeatFrac, 0.2, 0.5);
-    float bass = tanh(sinf(bassPhase * TWO_PI) * 1.5) * bassEnv;
+    float bassEnv = 0.2f - env(tBeatFrac, 0.2f, 0.5f);
+    float bass = tanh(sinf(bassPhase * TWO_PI) * 1.5f) * bassEnv;
 
     char chordHit = pattern[sixteenth];
-    float chordRootPitch = bassPitch * 4;
-    if (bar % 4 > 1) chordRootPitch /= 3.0 / 2.0;
+    float chordRootPitch = bassPitch * 4.0f;
+    if (bar % 4 > 1) chordRootPitch /= 3.0f / 2.0f;
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
-    chordPhase2 = phasor(chordPhase2, chordRootPitch * 6.0 / 5.0);
-    chordPhase3 = phasor(chordPhase3, chordRootPitch * 3.0 / 2.0);
+    chordPhase2 = phasor(chordPhase2, chordRootPitch * 6.0f / 5.0f);
+    chordPhase3 = phasor(chordPhase3, chordRootPitch * 3.0f / 2.0f);
     float chord1 = saw6f(chordPhase1 * TWO_PI);
     float chord2 = saw6f(chordPhase2 * TWO_PI);
     float chord3 = saw6f(chordPhase3 * TWO_PI);
-    float chordEnv = env(tSixteenthFrac, 0.1, 2.0) * chordHit;
+    float chordEnv = env(tSixteenthFrac, 0.1f, 2.0f) * chordHit;
     float chordOut = (chord1 + chord2 + chord3) * chordEnv;
-    chordOut = chordOut + processDelay(chordOut, 0.4, 0.375) * 0.4;
+    chordOut = chordOut + processDelay(chordOut, 0.4f, 0.375f) * 0.4f;
 
     outputBuffer[i] = tanh(kick + bass + chordOut);
   }
