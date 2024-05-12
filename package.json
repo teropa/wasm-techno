@@ -1,0 +1,16 @@
+{
+  "name": "wasm-techno",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "mdx-deck -p 9000 deck/deck.mdx"
+  },
+  "author": "Tero Parviainen <tero@teropa.info>",
+  "license": "ISC",
+  "devDependencies": {
+    "mdx-deck": "^4.1.1"
+  },
+  "dependencies": {
+    "code-surfer": "^3.1.1"
+  }
+}

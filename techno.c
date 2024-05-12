@@ -50,6 +50,16 @@ float processDelay(float input, float feedback, float delayTime) {
   return delayLine[delayIndex];
 }
 
+float* step1Sine() {
+  for (int i = 0; i < 128; i++) {
+    float kickPitch = 200.0;
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sinf(kickPhase * TWO_PI) * 0.15;
+    outputBuffer[i] = kick;
+  }
+  return outputBuffer;
+}
+
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR;
