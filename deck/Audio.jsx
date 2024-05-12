@@ -26,6 +26,7 @@ export const Audio = ({ versions }) => {
       let processor = new AudioWorkletNode(ctx, "techno-processor");
       processor.port.postMessage({ cmd: "init", wasmCode, version });
       processor.connect(ctx.destination);
+      console.log("connected", ctx.state);
       cleanUp = () => {
         processor.port.postMessage({ cmd: "destroy" });
         processor.disconnect();

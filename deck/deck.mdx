@@ -14,229 +14,284 @@ export const theme = myTheme;
 
 ---
 
-<Audio versions={{ 8: "step1Sine" }} />
+<Audio versions={{ 9: "step1Sine" }} />
 
 <CodeSurfer >
 
-```c 2:3 title="Sine Wave" subtitle="Duration of a sample"
+```c 2:4
 
+// Determine duration of one sample
 #define SAMPLERATE 48000.0f
 #define SAMPLE_DUR 1.0f / SAMPLERATE
 
+// Define phasor between 0 and 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq;
-  phase -= trunc(phase);
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
   return phase;
 }
 
-float kickPhase = 0.0f;
+float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f;
+    float kickPitch = 200.0f; // Hz
     kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI) * 0.15f;
-    outputBuffer[i] = kick;
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= 0.15f; // Make it less loud
+    outputBuffer[i] = kick; // Output
   }
   return outputBuffer;
 }
 
 ```
 
-```c 5 title="Sine Wave" subtitle="Phasor between 0 and 1 at a given frequency"
+```c 6:7
 
+// Determine duration of one sample
 #define SAMPLERATE 48000.0f
 #define SAMPLE_DUR 1.0f / SAMPLERATE
 
+// Define phasor between 0 and 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq;
-  phase -= trunc(phase);
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
   return phase;
 }
 
-float kickPhase = 0.0f;
+float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f;
+    float kickPitch = 200.0f; // Hz
     kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI) * 0.15f;
-    outputBuffer[i] = kick;
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= 0.15f; // Make it less loud
+    outputBuffer[i] = kick; // Output
   }
   return outputBuffer;
 }
 
 ```
 
-```c 6 title="Sine Wave" subtitle="Increment at every sample"
+```c 8
 
+// Determine duration of one sample
 #define SAMPLERATE 48000.0f
 #define SAMPLE_DUR 1.0f / SAMPLERATE
 
+// Define phasor between 0 and 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq;
-  phase -= trunc(phase);
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
   return phase;
 }
 
-float kickPhase = 0.0f;
+float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f;
+    float kickPitch = 200.0f; // Hz
     kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI) * 0.15f;
-    outputBuffer[i] = kick;
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= 0.15f; // Make it less loud
+    outputBuffer[i] = kick; // Output
   }
   return outputBuffer;
 }
 
 ```
 
-```c 7 title="Sine Wave" subtitle="Keep between 0-1"
+```c 9
 
+// Determine duration of one sample
 #define SAMPLERATE 48000.0f
 #define SAMPLE_DUR 1.0f / SAMPLERATE
 
+// Define phasor between 0 and 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq;
-  phase -= trunc(phase);
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
   return phase;
 }
 
-float kickPhase = 0.0f;
+float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f;
+    float kickPitch = 200.0f; // Hz
     kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI) * 0.15f;
-    outputBuffer[i] = kick;
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= 0.15f; // Make it less loud
+    outputBuffer[i] = kick; // Output
   }
   return outputBuffer;
 }
 
 ```
 
-```c 5:9 title="Sine Wave"
+```c 6:11
 
+// Determine duration of one sample
 #define SAMPLERATE 48000.0f
 #define SAMPLE_DUR 1.0f / SAMPLERATE
 
+// Define phasor between 0 and 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq;
-  phase -= trunc(phase);
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
   return phase;
 }
 
-float kickPhase = 0.0f;
+float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f;
+    float kickPitch = 200.0f; // Hz
     kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI) * 0.15f;
-    outputBuffer[i] = kick;
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= 0.15f; // Make it less loud
+    outputBuffer[i] = kick; // Output
   }
   return outputBuffer;
 }
 
 ```
 
-```c 11,15:16 title="Sine Wave" subtitle="Accumulate phase at 200Hz"
+```c 13,17:18
 
+// Determine duration of one sample
 #define SAMPLERATE 48000.0f
 #define SAMPLE_DUR 1.0f / SAMPLERATE
 
+// Define phasor between 0 and 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq;
-  phase -= trunc(phase);
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
   return phase;
 }
 
-float kickPhase = 0.0f;
+float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f;
+    float kickPitch = 200.0f; // Hz
     kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI) * 0.15f;
-    outputBuffer[i] = kick;
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= 0.15f; // Make it less loud
+    outputBuffer[i] = kick; // Output
   }
   return outputBuffer;
 }
 
 ```
 
-```c 17[18:40] title="Sine Wave" subtitle="Calculate sinusoid"
+```c 19
 
+// Determine duration of one sample
 #define SAMPLERATE 48000.0f
 #define SAMPLE_DUR 1.0f / SAMPLERATE
 
+// Define phasor between 0 and 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq;
-  phase -= trunc(phase);
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
   return phase;
 }
 
-float kickPhase = 0.0f;
+float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f;
+    float kickPitch = 200.0f; // Hz
     kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI) * 0.15f;
-    outputBuffer[i] = kick;
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= 0.15f; // Make it less loud
+    outputBuffer[i] = kick; // Output
   }
   return outputBuffer;
 }
 
 ```
 
-```c 17[42:47],18 title="Sine Wave" subtitle="Make it less loud and output"
+```c 20
 
+// Determine duration of one sample
 #define SAMPLERATE 48000.0f
 #define SAMPLE_DUR 1.0f / SAMPLERATE
 
+// Define phasor between 0 and 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq;
-  phase -= trunc(phase);
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
   return phase;
 }
 
-float kickPhase = 0.0f;
+float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f;
+    float kickPitch = 200.0f; // Hz
     kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI) * 0.15f;
-    outputBuffer[i] = kick;
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= 0.15f; // Make it less loud
+    outputBuffer[i] = kick; // Output
   }
   return outputBuffer;
 }
 
 ```
 
-```c title="Sine Wave"
+```c 21
 
+// Determine duration of one sample
 #define SAMPLERATE 48000.0f
 #define SAMPLE_DUR 1.0f / SAMPLERATE
 
+// Define phasor between 0 and 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq;
-  phase -= trunc(phase);
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
   return phase;
 }
 
-float kickPhase = 0.0f;
+float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f;
+    float kickPitch = 200.0f; // Hz
     kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI) * 0.15f;
-    outputBuffer[i] = kick;
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= 0.15f; // Make it less loud
+    outputBuffer[i] = kick; // Output
+  }
+  return outputBuffer;
+}
+
+```
+
+```c
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
+
+// Define phasor between 0 and 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
+  return phase;
+}
+
+float kickPhase = 0.0f; // Accumulated phase
+
+float* makeSomeTechno() {
+  for (int i = 0; i < 128; i++) {
+    float kickPitch = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= 0.15f; // Make it less loud
+    outputBuffer[i] = kick; // Output
   }
   return outputBuffer;
 }
