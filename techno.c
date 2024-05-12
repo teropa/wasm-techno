@@ -92,6 +92,37 @@ float* step3ExponentialEnv() {
   return outputBuffer;
 }
 
+float* step4KickPitchEnv1() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+    float kickPitchEnv = expEnvelope(tBeatFrac, 200.0f, 3.0);
+    float kickPitch = 50.0 + kickPitchEnv; // Hz
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= expEnvelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
+    outputBuffer[i] = kick; // Output
+  }
+  return outputBuffer;
+}
+
+float* step5KickPitchEnv2() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+    float kickPitchEnv = expEnvelope(tBeatFrac, 900.0f, 50.0);
+    float kickPitch = 50.0 + kickPitchEnv; // Hz
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= expEnvelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
+    outputBuffer[i] = kick; // Output
+  }
+  return outputBuffer;
+}
+
+
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR;
