@@ -15,13 +15,13 @@ export let myTheme = {
     CodeSurfer: {
       pre: {
         color: "text",
-        backgroundColor: "background",
+        background: "rgba(0, 0, 0, 0)",
       },
       code: {
         fontFamily: '"Kode Mono", monospace',
         fontWeight: "500",
         color: "text",
-        backgroundColor: "background",
+        background: "rgba(0, 0, 0, 0)",
       },
       tokens: {
         [["comment", "prolog", "doctype", "cdata", "punctuation"].join(" ")]: {

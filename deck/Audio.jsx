@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDeck } from "mdx-deck";
 
-let ctx = new AudioContext({ sampleRate: 48000, latencyHint: 0.1 });
+import { SpectrumAnalyser } from "./SpectrumAnalyser";
+
+let ctx = new AudioContext({ sampleRate: 48000, latencyHint: "playback" });
 
 document.documentElement.addEventListener("click", async () => {
   if (ctx.state !== "running") ctx.resume();
@@ -15,6 +17,7 @@ let workletLoad = ctx.audioWorklet.addModule("TechnoProcessor.js");
 
 export const Audio = ({ versions }) => {
   let { step } = useDeck();
+  let canvasRef = useRef();
 
   useEffect(() => {
     let version = versions[step];
@@ -26,10 +29,14 @@ export const Audio = ({ versions }) => {
       let processor = new AudioWorkletNode(ctx, "techno-processor");
       processor.port.postMessage({ cmd: "init", wasmCode, version });
       processor.connect(ctx.destination);
-      console.log("connected", ctx.state);
+
+      let analyser = new SpectrumAnalyser(ctx, processor, canvasRef.current);
+      analyser.analyse();
+
       cleanUp = () => {
         processor.port.postMessage({ cmd: "destroy" });
         processor.disconnect();
+        analyser.dispose();
       };
     });
     return () => {
@@ -38,5 +45,10 @@ export const Audio = ({ versions }) => {
     };
   }, [JSON.stringify(versions), step]);
 
-  return <></>;
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{ position: "absolute", width: "100%", height: "100%" }}
+    ></canvas>
+  );
 };
