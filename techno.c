@@ -28,7 +28,11 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
-float env(float t, float amp, float exp) {
+float linearEnvelope(float t, float amp) {
+  return (1.0f - t) * amp;
+}
+
+float expEnvelope(float t, float amp, float exp) {
   return powf(1.0f - t, exp) * amp;
 }
 
@@ -60,6 +64,34 @@ float* step1Sine() {
   return outputBuffer;
 }
 
+float* step2LinearEnv() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+    float kickPitch = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= linearEnvelope(tBeatFrac, 0.15f); // Shape the amplitude
+    outputBuffer[i] = kick; // Output
+  }
+  return outputBuffer;
+}
+
+float* step3ExponentialEnv() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+    float kickPitch = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= expEnvelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
+    outputBuffer[i] = kick; // Output
+  }
+  return outputBuffer;
+}
+
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR;
@@ -70,15 +102,15 @@ float* makeSomeTechno() {
     int sixteenth = (int)tSixteenths % 16;
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths);
 
-    float kickPitchEnv = env(tBeatFrac, 900.0f, 50.0f);
+    float kickPitchEnv = expEnvelope(tBeatFrac, 900.0f, 50.0f);
     float kickPitch = 50.0f + kickPitchEnv;
     kickPhase = phasor(kickPhase, kickPitch);
-    float kickEnv = env(tBeatFrac, 0.15f, 3.0f);
+    float kickEnv = expEnvelope(tBeatFrac, 0.15f, 3.0f);
     float kick = sinf(kickPhase * TWO_PI) * kickEnv;
 
     float bassPitch = 50.0f;
     bassPhase = phasor(bassPhase, bassPitch);
-    float bassEnv = 0.2f - env(tBeatFrac, 0.2f, 0.5f);
+    float bassEnv = 0.2f - expEnvelope(tBeatFrac, 0.2f, 0.5f);
     float bass = tanh(sinf(bassPhase * TWO_PI) * 1.5f) * bassEnv;
 
     char chordHit = pattern[sixteenth];
@@ -90,7 +122,7 @@ float* makeSomeTechno() {
     float chord1 = saw6f(chordPhase1 * TWO_PI);
     float chord2 = saw6f(chordPhase2 * TWO_PI);
     float chord3 = saw6f(chordPhase3 * TWO_PI);
-    float chordEnv = env(tSixteenthFrac, 0.1f, 2.0f) * chordHit;
+    float chordEnv = expEnvelope(tSixteenthFrac, 0.1f, 2.0f) * chordHit;
     float chordOut = (chord1 + chord2 + chord3) * chordEnv;
     chordOut = chordOut + processDelay(chordOut, 0.4f, 0.375f) * 0.4f;
 
