@@ -22,6 +22,7 @@ export const Audio = ({ versions }) => {
   useEffect(() => {
     let version = versions[step];
     if (!version) return;
+    console.log("Starting", version);
     let stillHere = true,
       cleanUp = () => {};
     Promise.all([wasmCode, workletLoad]).then(([wasmCode]) => {

@@ -24,6 +24,8 @@ export const theme = myTheme;
     21: "step6BassSine",
     23: "step7BassSaturation1",
     25: "step8BassSaturation2",
+    27: "step9BassSidechain1",
+    29: "step10BassSidechain2",
   }}
 />
 
@@ -955,6 +957,190 @@ float* makeSomeTechno() {
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= 0.2f; // Amplitude
+
+    outputBuffer[i] = kick + bass; // Output
+  }
+  return outputBuffer;
+}
+
+```
+
+```c 37
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
+
+// Define phasor between 0 and 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
+  return phase;
+}
+
+float envelope(float t, float amp, float exp) {
+  return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
+}
+
+unsigned long long tSamples = 0; // Accumulated samples
+float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
+
+float* makeSomeTechno() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+
+    // Kick
+    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= envelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
+
+    // Bass
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 3.0)); // "Sidechaining"
+
+    outputBuffer[i] = kick + bass; // Output
+  }
+  return outputBuffer;
+}
+
+```
+
+```c 37
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
+
+// Define phasor between 0 and 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
+  return phase;
+}
+
+float envelope(float t, float amp, float exp) {
+  return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
+}
+
+unsigned long long tSamples = 0; // Accumulated samples
+float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
+
+float* makeSomeTechno() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+
+    // Kick
+    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= envelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
+
+    // Bass
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 3.0)); // "Sidechaining"
+
+    outputBuffer[i] = kick + bass; // Output
+  }
+  return outputBuffer;
+}
+
+```
+
+```c 37
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
+
+// Define phasor between 0 and 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
+  return phase;
+}
+
+float envelope(float t, float amp, float exp) {
+  return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
+}
+
+unsigned long long tSamples = 0; // Accumulated samples
+float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
+
+float* makeSomeTechno() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+
+    // Kick
+    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= envelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
+
+    // Bass
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+
+    outputBuffer[i] = kick + bass; // Output
+  }
+  return outputBuffer;
+}
+
+```
+
+```c 37
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
+
+// Define phasor between 0 and 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
+  return phase;
+}
+
+float envelope(float t, float amp, float exp) {
+  return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
+}
+
+unsigned long long tSamples = 0; // Accumulated samples
+float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
+
+float* makeSomeTechno() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+
+    // Kick
+    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= envelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
+
+    // Bass
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
 
     outputBuffer[i] = kick + bass; // Output
   }

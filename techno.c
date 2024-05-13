@@ -157,7 +157,7 @@ float* step7BassSaturation1() {
     float bassPitch = 50.0f; // Hz
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
-    bass = tanh(bass); // More saturation
+    bass = tanh(bass); // Saturation
     bass *= 0.2f; // Loudness
 
     outputBuffer[i] = kick + bass; // Output
@@ -181,6 +181,50 @@ float* step8BassSaturation2() {
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= 0.2f; // Loudness
+
+    outputBuffer[i] = kick + bass; // Output
+  }
+  return outputBuffer;
+}
+
+float* step9BassSidechain1() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+
+    float kickPitch = 50.0f + expEnvelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= expEnvelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
+
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - expEnvelope(tBeatFrac, 0.2f, 3.0)); // "Sidechain"
+
+    outputBuffer[i] = kick + bass; // Output
+  }
+  return outputBuffer;
+}
+
+float* step10BassSidechain2() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+
+    float kickPitch = 50.0f + expEnvelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= expEnvelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
+
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - expEnvelope(tBeatFrac, 0.2f, 0.5)); // "Sidechain"
 
     outputBuffer[i] = kick + bass; // Output
   }
@@ -222,7 +266,7 @@ float* makeSomeTechno() {
     float chordOut = (chord1 + chord2 + chord3) * chordEnv;
     chordOut = chordOut + processDelay(chordOut, 0.4f, 0.375f) * 0.4f;
 
-    outputBuffer[i] = tanh(kick + bass + chordOut);
+    outputBuffer[i] = tanh(kick + bass /*+ chordOut*/);
   }
 
   return outputBuffer;
