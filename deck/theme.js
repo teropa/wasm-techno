@@ -71,7 +71,7 @@ export let myTheme = {
       },
       unfocused: {
         // only the opacity of unfocused code can be changed
-        opacity: 0.33,
+        opacity: 0.35,
       },
     },
   },
