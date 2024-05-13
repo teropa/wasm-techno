@@ -29,14 +29,22 @@ export const Audio = ({ versions }) => {
       if (!stillHere) return;
       let processor = new AudioWorkletNode(ctx, "techno-processor");
       processor.port.postMessage({ cmd: "init", wasmCode, version });
-      processor.connect(ctx.destination);
+      let gain = ctx.createGain();
+      gain.gain.value = 1.0;
+      processor.connect(gain);
+      gain.connect(ctx.destination);
 
       let analyser = new SpectrumAnalyser(ctx, processor, canvasRef.current);
       analyser.analyse();
 
       cleanUp = () => {
-        processor.port.postMessage({ cmd: "destroy" });
-        processor.disconnect();
+        gain.gain.setValueAtTime(1.0, ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.0, ctx.currentTime + 0.1);
+        setTimeout(() => {
+          processor.port.postMessage({ cmd: "destroy" });
+          processor.disconnect();
+          gain.disconnect();
+        }, 100);
         analyser.dispose();
       };
     });
