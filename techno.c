@@ -231,6 +231,64 @@ float* step10BassSidechain2() {
   return outputBuffer;
 }
 
+float* step11ChordsSine() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+
+    float kickPitch = 50.0f + expEnvelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= expEnvelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
+
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - expEnvelope(tBeatFrac, 0.2f, 0.5)); // "Sidechain"
+
+    // Chords
+    float chordPitch = bassPitch * 4;
+    chordPhase1 = phasor(chordPhase1, chordPitch);
+    float chord = sinf(chordPhase1 * TWO_PI);
+    chord *= expEnvelope(tBeatFrac, 0.1, 3.0);
+
+    outputBuffer[i] = kick + bass + chord; // Output
+  }
+  return outputBuffer;
+}
+
+float* step12ChordsBeats() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+    float tSixteenths = tBeats * 4.0;
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths);
+
+    float kickPitch = 50.0f + expEnvelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= expEnvelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
+
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - expEnvelope(tBeatFrac, 0.2f, 0.5)); // "Sidechain"
+
+    // Chords
+    float chordPitch = bassPitch * 4;
+    chordPhase1 = phasor(chordPhase1, chordPitch);
+    float chord = sinf(chordPhase1 * TWO_PI);
+    chord *= expEnvelope(tSixteenthFrac, 0.1, 3.0);
+
+    outputBuffer[i] = kick + bass + chord; // Output
+  }
+  return outputBuffer;
+}
+
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
