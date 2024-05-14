@@ -38,11 +38,11 @@ float expEnvelope(float t, float amp, float exp) {
 
 float saw6f(float phase) {
   return sinf(phase) +
-    sinf(phase * 2.0f) / 2.0f +
-    sinf(phase * 3.0f) / 3.0f +
-    sinf(phase * 4.0f) / 4.0f +
-    sinf(phase * 5.0f) / 5.0f +
-    sinf(phase * 6.0f) / 6.0f;
+    sinf(phase * 2.0f) * 0.5f +
+    sinf(phase * 3.0f) * 0.33f +
+    sinf(phase * 4.0f) * 0.25f +
+    sinf(phase * 5.0f) * 0.2f +
+    sinf(phase * 6.0f) * 0.16f;
 }
 
 
@@ -320,6 +320,183 @@ float* step13ChordsPattern() {
   return outputBuffer;
 }
 
+float saw2f(float phase) {
+  return sinf(phase) +
+    sinf(phase * 2.0f) * 0.5f;
+}
+float saw3f(float phase) {
+  return sinf(phase) +
+    sinf(phase * 2.0f) * 0.5f +
+    sinf(phase * 3.0f) * 0.33f;
+}
+float saw4f(float phase) {
+  return sinf(phase) +
+    sinf(phase * 2.0f) * 0.5f +
+    sinf(phase * 3.0f) * 0.33f +
+    sinf(phase * 4.0f) * 0.25f;
+}
+float saw5f(float phase) {
+  return sinf(phase) +
+    sinf(phase * 2.0f) * 0.5f +
+    sinf(phase * 3.0f) * 0.33f +
+    sinf(phase * 4.0f) * 0.25f +
+    sinf(phase * 5.0f) * 0.2f;
+}
+
+float* step14ChordsSaw2() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+    float tSixteenths = tBeats * 4.0;
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths);
+
+    float kickPitch = 50.0f + expEnvelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= expEnvelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
+
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - expEnvelope(tBeatFrac, 0.2f, 0.5)); // "Sidechain"
+
+    // Chords
+    float chordPitch = bassPitch * 4;
+    chordPhase1 = phasor(chordPhase1, chordPitch);
+    float chord = saw2f(chordPhase1 * TWO_PI);
+    float chordHit = pattern[(int)tSixteenths % 16];
+    chord *= expEnvelope(tSixteenthFrac, 0.1, 3.0) * chordHit;
+
+    outputBuffer[i] = kick + bass + chord; // Output
+  }
+  return outputBuffer;
+}
+
+float* step15ChordsSaw3() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+    float tSixteenths = tBeats * 4.0;
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths);
+
+    float kickPitch = 50.0f + expEnvelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= expEnvelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
+
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - expEnvelope(tBeatFrac, 0.2f, 0.5)); // "Sidechain"
+
+    // Chords
+    float chordPitch = bassPitch * 4;
+    chordPhase1 = phasor(chordPhase1, chordPitch);
+    float chord = saw3f(chordPhase1 * TWO_PI);
+    float chordHit = pattern[(int)tSixteenths % 16];
+    chord *= expEnvelope(tSixteenthFrac, 0.1, 3.0) * chordHit;
+
+    outputBuffer[i] = kick + bass + chord; // Output
+  }
+  return outputBuffer;
+}
+
+float* step16ChordsSaw4() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+    float tSixteenths = tBeats * 4.0;
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths);
+
+    float kickPitch = 50.0f + expEnvelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= expEnvelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
+
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - expEnvelope(tBeatFrac, 0.2f, 0.5)); // "Sidechain"
+
+    // Chords
+    float chordPitch = bassPitch * 4;
+    chordPhase1 = phasor(chordPhase1, chordPitch);
+    float chord = saw4f(chordPhase1 * TWO_PI);
+    float chordHit = pattern[(int)tSixteenths % 16];
+    chord *= expEnvelope(tSixteenthFrac, 0.1, 3.0) * chordHit;
+
+    outputBuffer[i] = kick + bass + chord; // Output
+  }
+  return outputBuffer;
+}
+
+float* step17ChordsSaw5() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+    float tSixteenths = tBeats * 4.0;
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths);
+
+    float kickPitch = 50.0f + expEnvelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= expEnvelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
+
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - expEnvelope(tBeatFrac, 0.2f, 0.5)); // "Sidechain"
+
+    // Chords
+    float chordPitch = bassPitch * 4;
+    chordPhase1 = phasor(chordPhase1, chordPitch);
+    float chord = saw5f(chordPhase1 * TWO_PI);
+    float chordHit = pattern[(int)tSixteenths % 16];
+    chord *= expEnvelope(tSixteenthFrac, 0.1, 3.0) * chordHit;
+
+    outputBuffer[i] = kick + bass + chord; // Output
+  }
+  return outputBuffer;
+}
+
+float* step18ChordsSaw6() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+    float tSixteenths = tBeats * 4.0;
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths);
+
+    float kickPitch = 50.0f + expEnvelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= expEnvelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
+
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - expEnvelope(tBeatFrac, 0.2f, 0.5)); // "Sidechain"
+
+    // Chords
+    float chordPitch = bassPitch * 4;
+    chordPhase1 = phasor(chordPhase1, chordPitch);
+    float chord = saw6f(chordPhase1 * TWO_PI);
+    float chordHit = pattern[(int)tSixteenths % 16];
+    chord *= expEnvelope(tSixteenthFrac, 0.1, 3.0) * chordHit;
+
+    outputBuffer[i] = kick + bass + chord; // Output
+  }
+  return outputBuffer;
+}
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
