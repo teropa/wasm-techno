@@ -43,7 +43,7 @@ export class SpectrumAnalyser {
   draw() {
     let w = this.canvas.width,
       h = this.canvas.height,
-      yScale = this.canvas.height / 255;
+      yScale = (this.canvas.height / 255) * 0.66;
 
     let ctx = this.canvas.getContext("2d");
     if (!ctx) throw new Error("Could not get a canvas context!");
@@ -58,7 +58,7 @@ export class SpectrumAnalyser {
     }
     path.lineTo(w, h);
 
-    ctx.fillStyle = "rgba(50, 50, 50, 0.7)";
+    ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
     ctx.fill(path);
   }
 

@@ -57,7 +57,13 @@ export const Audio = ({ versions }) => {
   return (
     <canvas
       ref={canvasRef}
-      style={{ position: "absolute", width: "100%", height: "100%" }}
+      style={{
+        position: "absolute",
+        right: 20,
+        bottom: 20,
+        width: "30%",
+        height: "35%",
+      }}
     ></canvas>
   );
 };
