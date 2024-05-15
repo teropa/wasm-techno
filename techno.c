@@ -35,7 +35,7 @@ float linearEnvelope(float t, float amp) {
 }
 
 float expEnvelope(float t, float amp, float exp) {
-  return powf(1.0f - t, exp) * amp;
+  return powf(1.0f - t, exp) * powf(2.0f, -0.001f / t) * amp;
 }
 
 float saw6f(float phase) {
