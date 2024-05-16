@@ -48,12 +48,22 @@ float saw6f(float phase) {
 }
 
 
-float delayLine[48000] = {0};
+// Ring buffer delay line
+float delayLine[(int)SAMPLERATE] = {0}; // Store max 1 second of samples
 int delayIndex = 0;
+float processDelayNoFb(float input, float delayTime) {
+  delayLine[delayIndex] = input; // Write current input
+  delayIndex++; // Move to next sample
+  delayIndex %= (int)(delayTime * SAMPLERATE); // Wrap if exceeding delay time
+  return delayLine[delayIndex]; // Read delayed output
+}
+
 float processDelay(float input, float feedback, float delayTime) {
+  // Write current input retaining some of the previous output as feedback
   delayLine[delayIndex] = input + delayLine[delayIndex] * feedback;
-  delayIndex = (delayIndex + 1) % (int)(delayTime * SAMPLERATE);
-  return delayLine[delayIndex];
+  delayIndex++; // Move to next sample
+  delayIndex %= (int)(delayTime * SAMPLERATE); // Wrap if exceeding delay time
+  return delayLine[delayIndex]; // Read delayed output
 }
 
 float saw2f(float phase) {
@@ -81,7 +91,7 @@ float saw5f(float phase) {
 
 void setStep(int step) {
   currentStep = step;
-  if (step == 20) {
+  if (step == 20 || step == 21) {
     tSamples = 0; // hear the "chord progression" from the beginning
   }
 }
@@ -423,33 +433,60 @@ float* makeSomeTechno() {
       chord *= expEnvelope(tSixteenthFrac, 0.1, 3.0) * chordHit;
 
       outputBuffer[i] = kick + bass + chord; // Output
-    } else if (currentStep == 999) {
-
-      float kickPitchEnv = expEnvelope(tBeatFrac, 900.0f, 50.0f);
-      float kickPitch = 50.0f + kickPitchEnv;
+    } else if (currentStep == 21) {
+      float kickPitch = 50.0f + expEnvelope(tBeatFrac, 900.0f, 50.0f); // More!
       kickPhase = phasor(kickPhase, kickPitch);
-      float kickEnv = expEnvelope(tBeatFrac, 0.15f, 3.0f);
-      float kick = sinf(kickPhase * TWO_PI) * kickEnv;
+      float kick = sin(kickPhase * TWO_PI); // Sine wave
+      kick *= expEnvelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
 
-      float bassPitch = 50.0f;
+      float bassPitch = 50.0f; // Hz
       bassPhase = phasor(bassPhase, bassPitch);
-      float bassEnv = 0.2f - expEnvelope(tBeatFrac, 0.2f, 0.5f);
-      float bass = tanh(sinf(bassPhase * TWO_PI) * 1.5f) * bassEnv;
+      float bass = sinf(bassPhase * TWO_PI); // Sine wave
+      bass = tanh(bass * 1.5f); // More saturation
+      bass *= (0.2f - expEnvelope(tBeatFrac, 0.2f, 0.5)); // "Sidechain"
 
-      char chordHit = pattern[sixteenth];
+      // Chords
       float chordRootPitch = bassPitch * 4.0f;
       if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
       chordPhase1 = phasor(chordPhase1, chordRootPitch);
-      chordPhase2 = phasor(chordPhase2, chordRootPitch * 6.0f / 5.0f);
-      chordPhase3 = phasor(chordPhase3, chordRootPitch * 3.0f / 2.0f);
-      float chord1 = saw6f(chordPhase1 * TWO_PI);
-      float chord2 = saw6f(chordPhase2 * TWO_PI);
-      float chord3 = saw6f(chordPhase3 * TWO_PI);
-      float chordEnv = expEnvelope(tSixteenthFrac, 0.1f, 2.0f) * chordHit;
-      float chordOut = (chord1 + chord2 + chord3) * chordEnv;
-      chordOut = chordOut + processDelay(chordOut, 0.4f, 0.375f) * 0.4f;
+      chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f);
+      chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f);
+      float chord =
+        saw6f(chordPhase1 * TWO_PI) +
+        saw6f(chordPhase2 * TWO_PI) +
+        saw6f(chordPhase3 * TWO_PI);
+      float chordHit = pattern[(int)tSixteenths % 16];
+      chord *= expEnvelope(tSixteenthFrac, 0.1, 3.0) * chordHit;
+      chord = chord + processDelayNoFb(chord, 0.375f) * 0.4; // Dotted 8th delay
 
-      outputBuffer[i] = tanh(kick + bass + chordOut);
+      outputBuffer[i] = kick + bass + chord; // Output
+    } else if (currentStep == 22 || currentStep == 999) {
+      float kickPitch = 50.0f + expEnvelope(tBeatFrac, 900.0f, 50.0f); // More!
+      kickPhase = phasor(kickPhase, kickPitch);
+      float kick = sin(kickPhase * TWO_PI); // Sine wave
+      kick *= expEnvelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
+
+      float bassPitch = 50.0f; // Hz
+      bassPhase = phasor(bassPhase, bassPitch);
+      float bass = sinf(bassPhase * TWO_PI); // Sine wave
+      bass = tanh(bass * 1.5f); // More saturation
+      bass *= (0.2f - expEnvelope(tBeatFrac, 0.2f, 0.5)); // "Sidechain"
+
+      // Chords
+      float chordRootPitch = bassPitch * 4.0f;
+      if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
+      chordPhase1 = phasor(chordPhase1, chordRootPitch);
+      chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f);
+      chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f);
+      float chord =
+        saw6f(chordPhase1 * TWO_PI) +
+        saw6f(chordPhase2 * TWO_PI) +
+        saw6f(chordPhase3 * TWO_PI);
+      float chordHit = pattern[(int)tSixteenths % 16];
+      chord *= expEnvelope(tSixteenthFrac, 0.1, 3.0) * chordHit;
+      chord = chord + processDelay(chord, 0.5f, 0.375f) * 0.4; // Dotted 8th delay
+
+      outputBuffer[i] = kick + bass + chord; // Output
     }
   }
 
