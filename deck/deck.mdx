@@ -34,6 +34,8 @@ export const theme = myTheme;
     43: 15,
     44: 16,
     45: 17,
+    47: 18,
+    49: 19,
   }}
 />
 
@@ -1175,7 +1177,7 @@ float envelope(float t, float amp, float exp) {
 }
 
 unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
+float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
@@ -1197,7 +1199,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4;
+    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = sinf(chordPhase * TWO_PI);
     chord *= envelope(tBeatFrac, 0.1, 3.0);
@@ -1227,7 +1229,7 @@ float envelope(float t, float amp, float exp) {
 }
 
 unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
+float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
@@ -1249,7 +1251,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4;
+    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = sinf(chordPhase * TWO_PI);
     chord *= envelope(tBeatFrac, 0.1, 3.0);
@@ -1279,7 +1281,7 @@ float envelope(float t, float amp, float exp) {
 }
 
 unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
+float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
@@ -1303,7 +1305,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4;
+    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = sinf(chordPhase * TWO_PI);
     chord *= envelope(tBeatFrac, 0.1, 3.0);
@@ -1333,7 +1335,7 @@ float envelope(float t, float amp, float exp) {
 }
 
 unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
+float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
@@ -1357,7 +1359,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4;
+    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = sinf(chordPhase * TWO_PI);
     chord *= envelope(tSixteenthFrac, 0.1, 3.0);
@@ -1387,7 +1389,7 @@ float envelope(float t, float amp, float exp) {
 }
 
 unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
+float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
@@ -1411,7 +1413,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4;
+    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = sinf(chordPhase * TWO_PI);
     chord *= envelope(tSixteenthFrac, 0.1, 3.0);
@@ -1448,7 +1450,7 @@ const char chordPattern[16] = {
 };
 
 unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
+float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
@@ -1472,7 +1474,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4;
+    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = sinf(chordPhase * TWO_PI);
     chord *= envelope(tSixteenthFrac, 0.1, 3.0);
@@ -1509,7 +1511,7 @@ const char chordPattern[16] = {
 };
 
 unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
+float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
@@ -1533,7 +1535,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4;
+    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = sinf(chordPhase * TWO_PI);
     char chordHit = chordPattern[(int)tSixteenths % 16];
@@ -1571,7 +1573,7 @@ const char chordPattern[16] = {
 };
 
 unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
+float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
@@ -1595,7 +1597,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4;
+    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = sinf(chordPhase * TWO_PI);
     char chordHit = chordPattern[(int)tSixteenths % 16];
@@ -1633,7 +1635,7 @@ const char chordPattern[16] = {
 };
 
 unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
+float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
@@ -1657,7 +1659,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4;
+    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = saw6f(chordPhase * TWO_PI);
     char chordHit = chordPattern[(int)tSixteenths % 16];
@@ -1699,7 +1701,7 @@ const char chordPattern[16] = {
 };
 
 unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
+float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
@@ -1723,75 +1725,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4;
-    chordPhase = phasor(chordPhase, chordPitch);
-    float chord = saw6f(chordPhase * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
-    chord *= envelope(tSixteenthFrac, 0.1, 3.0) * chordHit;
-
-    outputBuffer[i] = kick + bass + chord; // Output
-  }
-  return outputBuffer;
-}
-
-```
-
-```c 14:16
-
-// Determine duration of one sample
-#define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
-
-// Define phasor between 0 and 1 at a given frequency
-float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
-  return phase;
-}
-
-float saw6f(float phase) {
-  // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0) / 2.0;
-}
-
-float envelope(float t, float amp, float exp) {
-  return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
-}
-
-const char chordPattern[16] = {
-  0, 1, 0, 0,
-  0, 0, 1, 0,
-  1, 0, 0, 1,
-  0, 0, 1, 0
-};
-
-unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
-
-float* makeSomeTechno() {
-  for (int i = 0; i < 128; i++) {
-    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
-    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
-    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
-    float tSixteenths = tBeats * 4.0;
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths);
-
-    // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // More!
-    kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI); // Sine wave
-    kick *= envelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
-
-    // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
-    float bass = sinf(bassPhase * TWO_PI); // Sine wave
-    bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
-
-    // Chords
-    float chordPitch = bassPitch * 4;
+    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = saw6f(chordPhase * TWO_PI);
     char chordHit = chordPattern[(int)tSixteenths % 16];
@@ -1835,7 +1769,7 @@ const char chordPattern[16] = {
 };
 
 unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
+float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
@@ -1859,7 +1793,75 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4;
+    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordPitch);
+    float chord = saw6f(chordPhase * TWO_PI);
+    char chordHit = chordPattern[(int)tSixteenths % 16];
+    chord *= envelope(tSixteenthFrac, 0.1, 3.0) * chordHit;
+
+    outputBuffer[i] = kick + bass + chord; // Output
+  }
+  return outputBuffer;
+}
+
+```
+
+```c 14:16
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
+
+// Define phasor between 0 and 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
+  return phase;
+}
+
+float saw6f(float phase) {
+  // Add harmonics
+  return sinf(phase) +
+    sinf(phase * 2.0f) * 0.5f;
+}
+
+float envelope(float t, float amp, float exp) {
+  return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
+}
+
+const char chordPattern[16] = {
+  0, 1, 0, 0,
+  0, 0, 1, 0,
+  1, 0, 0, 1,
+  0, 0, 1, 0
+};
+
+unsigned long long tSamples = 0; // Accumulated samples
+float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
+
+float* makeSomeTechno() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+    float tSixteenths = tBeats * 4.0;
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths);
+
+    // Kick
+    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= envelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
+
+    // Bass
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+
+    // Chords
+    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = saw6f(chordPhase * TWO_PI);
     char chordHit = chordPattern[(int)tSixteenths % 16];
@@ -1904,7 +1906,7 @@ const char chordPattern[16] = {
 };
 
 unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
+float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
@@ -1928,7 +1930,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4;
+    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = saw6f(chordPhase * TWO_PI);
     char chordHit = chordPattern[(int)tSixteenths % 16];
@@ -1974,7 +1976,7 @@ const char chordPattern[16] = {
 };
 
 unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
+float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
@@ -1998,7 +2000,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4;
+    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = saw6f(chordPhase * TWO_PI);
     char chordHit = chordPattern[(int)tSixteenths % 16];
@@ -2045,7 +2047,7 @@ const char chordPattern[16] = {
 };
 
 unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
+float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
@@ -2069,7 +2071,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4;
+    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = saw6f(chordPhase * TWO_PI);
     char chordHit = chordPattern[(int)tSixteenths % 16];
@@ -2117,7 +2119,7 @@ const char chordPattern[16] = {
 };
 
 unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
+float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
@@ -2141,9 +2143,317 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4;
+    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = saw6f(chordPhase * TWO_PI);
+    char chordHit = chordPattern[(int)tSixteenths % 16];
+    chord *= envelope(tSixteenthFrac, 0.1, 3.0) * chordHit;
+
+    outputBuffer[i] = kick + bass + chord; // Output
+  }
+  return outputBuffer;
+}
+
+```
+
+```c 60:65
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
+
+// Define phasor between 0 and 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
+  return phase;
+}
+
+float saw6f(float phase) {
+  // Add harmonics
+  return sinf(phase) +
+    sinf(phase * 2.0f) * 0.5f +
+    sinf(phase * 3.0f) * 0.33f +
+    sinf(phase * 4.0f) * 0.25f +
+    sinf(phase * 5.0f) * 0.2f +
+    sinf(phase * 6.0f) * 0.16f;
+}
+
+float envelope(float t, float amp, float exp) {
+  return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
+}
+
+const char chordPattern[16] = {
+  0, 1, 0, 0,
+  0, 0, 1, 0,
+  1, 0, 0, 1,
+  0, 0, 1, 0
+};
+
+unsigned long long tSamples = 0; // Accumulated samples
+float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
+      chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
+
+float* makeSomeTechno() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+    float tSixteenths = tBeats * 4.0;
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths);
+
+    // Kick
+    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= envelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
+
+    // Bass
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+
+    // Chords
+    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    chordPhase1 = phasor(chordPhase1, chordRootPitch);
+    chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
+    float chord =
+      saw6f(chordPhase1 * TWO_PI) +
+      saw6f(chordPhase2 * TWO_PI);
+    char chordHit = chordPattern[(int)tSixteenths % 16];
+    chord *= envelope(tSixteenthFrac, 0.1, 3.0) * chordHit;
+
+    outputBuffer[i] = kick + bass + chord; // Output
+  }
+  return outputBuffer;
+}
+
+```
+
+```c 60:65
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
+
+// Define phasor between 0 and 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
+  return phase;
+}
+
+float saw6f(float phase) {
+  // Add harmonics
+  return sinf(phase) +
+    sinf(phase * 2.0f) * 0.5f +
+    sinf(phase * 3.0f) * 0.33f +
+    sinf(phase * 4.0f) * 0.25f +
+    sinf(phase * 5.0f) * 0.2f +
+    sinf(phase * 6.0f) * 0.16f;
+}
+
+float envelope(float t, float amp, float exp) {
+  return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
+}
+
+const char chordPattern[16] = {
+  0, 1, 0, 0,
+  0, 0, 1, 0,
+  1, 0, 0, 1,
+  0, 0, 1, 0
+};
+
+unsigned long long tSamples = 0; // Accumulated samples
+float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
+      chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
+
+float* makeSomeTechno() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+    float tSixteenths = tBeats * 4.0;
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths);
+
+    // Kick
+    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= envelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
+
+    // Bass
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+
+    // Chords
+    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    chordPhase1 = phasor(chordPhase1, chordRootPitch);
+    chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
+    float chord =
+      saw6f(chordPhase1 * TWO_PI) +
+      saw6f(chordPhase2 * TWO_PI);
+    char chordHit = chordPattern[(int)tSixteenths % 16];
+    chord *= envelope(tSixteenthFrac, 0.1, 3.0) * chordHit;
+
+    outputBuffer[i] = kick + bass + chord; // Output
+  }
+  return outputBuffer;
+}
+
+```
+
+```c 60:67
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
+
+// Define phasor between 0 and 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
+  return phase;
+}
+
+float saw6f(float phase) {
+  // Add harmonics
+  return sinf(phase) +
+    sinf(phase * 2.0f) * 0.5f +
+    sinf(phase * 3.0f) * 0.33f +
+    sinf(phase * 4.0f) * 0.25f +
+    sinf(phase * 5.0f) * 0.2f +
+    sinf(phase * 6.0f) * 0.16f;
+}
+
+float envelope(float t, float amp, float exp) {
+  return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
+}
+
+const char chordPattern[16] = {
+  0, 1, 0, 0,
+  0, 0, 1, 0,
+  1, 0, 0, 1,
+  0, 0, 1, 0
+};
+
+unsigned long long tSamples = 0; // Accumulated samples
+float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
+      chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
+
+float* makeSomeTechno() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+    float tSixteenths = tBeats * 4.0;
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths);
+
+    // Kick
+    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= envelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
+
+    // Bass
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+
+    // Chords
+    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    chordPhase1 = phasor(chordPhase1, chordRootPitch);
+    chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f); // Minor 3rd
+    float chord =
+      saw6f(chordPhase1 * TWO_PI) +
+      saw6f(chordPhase2 * TWO_PI) +
+      saw6f(chordPhase3 * TWO_PI);
+    char chordHit = chordPattern[(int)tSixteenths % 16];
+    chord *= envelope(tSixteenthFrac, 0.1, 3.0) * chordHit;
+
+    outputBuffer[i] = kick + bass + chord; // Output
+  }
+  return outputBuffer;
+}
+
+```
+
+```c 60:67
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
+
+// Define phasor between 0 and 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
+  return phase;
+}
+
+float saw6f(float phase) {
+  // Add harmonics
+  return sinf(phase) +
+    sinf(phase * 2.0f) * 0.5f +
+    sinf(phase * 3.0f) * 0.33f +
+    sinf(phase * 4.0f) * 0.25f +
+    sinf(phase * 5.0f) * 0.2f +
+    sinf(phase * 6.0f) * 0.16f;
+}
+
+float envelope(float t, float amp, float exp) {
+  return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
+}
+
+const char chordPattern[16] = {
+  0, 1, 0, 0,
+  0, 0, 1, 0,
+  1, 0, 0, 1,
+  0, 0, 1, 0
+};
+
+unsigned long long tSamples = 0; // Accumulated samples
+float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
+      chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
+
+float* makeSomeTechno() {
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+    float tSixteenths = tBeats * 4.0;
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths);
+
+    // Kick
+    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= envelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
+
+    // Bass
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+
+    // Chords
+    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    chordPhase1 = phasor(chordPhase1, chordRootPitch);
+    chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f); // Minor 3rd
+    float chord =
+      saw6f(chordPhase1 * TWO_PI) +
+      saw6f(chordPhase2 * TWO_PI) +
+      saw6f(chordPhase3 * TWO_PI);
     char chordHit = chordPattern[(int)tSixteenths % 16];
     chord *= envelope(tSixteenthFrac, 0.1, 3.0) * chordHit;
 
