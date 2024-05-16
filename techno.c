@@ -81,13 +81,16 @@ float saw5f(float phase) {
 
 void setStep(int step) {
   currentStep = step;
+  if (step == 20) {
+    tSamples = 0; // hear the "chord progression" from the beginning
+  }
 }
 
 float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR;
     float tBeats = tSeconds * 2.0f; // 120 BPM
-    int bar = (int)tBeats / 4;
+    float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
     float tBeatFrac = tBeats - trunc(tBeats);
     float tSixteenths = tBeats * 4.0f;
     int sixteenth = (int)tSixteenths % 16;
@@ -394,6 +397,32 @@ float* makeSomeTechno() {
       chord *= expEnvelope(tSixteenthFrac, 0.1, 3.0) * chordHit;
 
       outputBuffer[i] = kick + bass + chord; // Output
+    } else if (currentStep == 20) {
+      float kickPitch = 50.0f + expEnvelope(tBeatFrac, 900.0f, 50.0f); // More!
+      kickPhase = phasor(kickPhase, kickPitch);
+      float kick = sin(kickPhase * TWO_PI); // Sine wave
+      kick *= expEnvelope(tBeatFrac, 0.15f, 3.0); // Shape the amplitude
+
+      float bassPitch = 50.0f; // Hz
+      bassPhase = phasor(bassPhase, bassPitch);
+      float bass = sinf(bassPhase * TWO_PI); // Sine wave
+      bass = tanh(bass * 1.5f); // More saturation
+      bass *= (0.2f - expEnvelope(tBeatFrac, 0.2f, 0.5)); // "Sidechain"
+
+      // Chords
+      float chordRootPitch = bassPitch * 4.0f;
+      if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
+      chordPhase1 = phasor(chordPhase1, chordRootPitch);
+      chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f);
+      chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f);
+      float chord =
+        saw6f(chordPhase1 * TWO_PI) +
+        saw6f(chordPhase2 * TWO_PI) +
+        saw6f(chordPhase3 * TWO_PI);
+      float chordHit = pattern[(int)tSixteenths % 16];
+      chord *= expEnvelope(tSixteenthFrac, 0.1, 3.0) * chordHit;
+
+      outputBuffer[i] = kick + bass + chord; // Output
     } else if (currentStep == 999) {
 
       float kickPitchEnv = expEnvelope(tBeatFrac, 900.0f, 50.0f);
@@ -409,7 +438,7 @@ float* makeSomeTechno() {
 
       char chordHit = pattern[sixteenth];
       float chordRootPitch = bassPitch * 4.0f;
-      if (bar % 4 > 1) chordRootPitch /= 3.0f / 2.0f;
+      if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
       chordPhase1 = phasor(chordPhase1, chordRootPitch);
       chordPhase2 = phasor(chordPhase2, chordRootPitch * 6.0f / 5.0f);
       chordPhase3 = phasor(chordPhase3, chordRootPitch * 3.0f / 2.0f);
