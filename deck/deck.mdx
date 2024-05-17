@@ -14,6 +14,439 @@ export const theme = myTheme;
 
 ---
 
+<CodeSurfer >
+
+```js
+// Web Audio Context
+let ctx = new AudioContext({ sampleRate: 48000 });
+```
+
+```js
+// Web Audio Context
+let ctx = new AudioContext({ sampleRate: 48000 });
+
+// Audio Worklet
+await ctx.audioWorklet.addModule("TechnoProcessor.js");
+let worklet = new AudioWorkletNode(ctx, "techno-processor");
+worklet.connect(ctx.destination);
+```
+
+</CodeSurfer>
+
+---
+
+---
+
+<CodeSurfer>
+
+```js
+// Audio Worklet Processor on Audio Thread
+class TechnoProcessor extends AudioWorkletProcessor {
+  process(inputs, outputs) {
+    return true;
+  }
+}
+```
+
+```js 3:6
+// Audio Worklet Processor on Audio Thread
+class TechnoProcessor extends AudioWorkletProcessor {
+  process(inputs, outputs) {
+    // Process 48000 samples per second, 128 at a time
+    return true;
+  }
+}
+```
+
+</CodeSurfer>
+
+---
+
+---
+
+<CodeSurfer>
+
+```c
+// Audio Processing code in C
+
+// Array of samples
+static float outputBuffer[128];
+
+float* makeSomeTechno() {
+  // Process 128 samples into the array
+  for (int i = 0; i < 128; i++) {
+    outputBuffer[i] = 0.0;
+  }
+  // Return pointer to the array
+  return outputBuffer;
+}
+```
+
+```c 3:4
+// Audio Processing code in C
+
+// Array of samples
+static float outputBuffer[128];
+
+float* makeSomeTechno() {
+  // Process 128 samples into the array
+  for (int i = 0; i < 128; i++) {
+    outputBuffer[i] = 0.0;
+  }
+  // Return pointer to the array
+  return outputBuffer;
+}
+```
+
+```c 6
+// Audio Processing code in C
+
+// Array of samples
+static float outputBuffer[128];
+
+float* makeSomeTechno() {
+  // Process 128 samples into the array
+  for (int i = 0; i < 128; i++) {
+    outputBuffer[i] = 0.0;
+  }
+  // Return pointer to the array
+  return outputBuffer;
+}
+```
+
+```c 6:10
+// Audio Processing code in C
+
+// Array of samples
+static float outputBuffer[128];
+
+float* makeSomeTechno() {
+  // Process 128 samples into the array
+  for (int i = 0; i < 128; i++) {
+    outputBuffer[i] = 0.0;
+  }
+  // Return pointer to the array
+  return outputBuffer;
+}
+```
+
+```c 6:12
+// Audio Processing code in C
+
+// Array of samples
+static float outputBuffer[128];
+
+float* makeSomeTechno() {
+  // Process 128 samples into the array
+  for (int i = 0; i < 128; i++) {
+    outputBuffer[i] = 0.0;
+  }
+  // Return pointer to the array
+  return outputBuffer;
+}
+```
+
+</CodeSurfer>
+
+---
+
+---
+
+<CodeSurfer>
+
+```bash
+# Compile C to WASM with Emscripten / Clang
+emcc \
+  --no-entry \
+  -O3 \
+  -s WASM=1 \
+  -s EXPORTED_FUNCTIONS=_makeSomeTechno \
+  -o techno.wasm \
+  techno.c
+```
+
+</CodeSurfer>
+
+---
+
+---
+
+<CodeSurfer>
+
+```js
+// Web Audio Context
+let ctx = new AudioContext({ sampleRate: 48000 });
+
+// Audio Worklet
+await ctx.audioWorklet.addModule("TechnoProcessor.js");
+let worklet = new AudioWorkletNode(ctx, "techno-processor");
+worklet.connect(ctx.destination);
+```
+
+```js 9:11
+// Web Audio Context
+let ctx = new AudioContext({ sampleRate: 48000 });
+
+// Audio Worklet
+await ctx.audioWorklet.addModule("TechnoProcessor.js");
+let worklet = new AudioWorkletNode(ctx, "techno-processor");
+worklet.connect(ctx.destination);
+
+// Load WASM code
+let wasmCode = await fetch("techno.wasm")
+  .then((r) => r.arrayBuffer());
+// Send it to the Audio Worklet
+worklet.port.postMessage({ wasmCode });
+```
+
+```js 12:13
+// Web Audio Context
+let ctx = new AudioContext({ sampleRate: 48000 });
+
+// Audio Worklet
+await ctx.audioWorklet.addModule("TechnoProcessor.js");
+let worklet = new AudioWorkletNode(ctx, "techno-processor");
+worklet.connect(ctx.destination);
+
+// Load WASM code
+let wasmCode = await fetch("techno.wasm")
+  .then((r) => r.arrayBuffer());
+// Send it to the Audio Worklet
+worklet.port.postMessage({ wasmCode });
+```
+
+
+</CodeSurfer>
+
+---
+
+---
+
+<CodeSurfer>
+
+```js
+// Audio Worklet Processor on Audio Thread
+class TechnoProcessor extends AudioWorkletProcessor {
+  process(inputs, outputs) {
+    // Process 48000 samples per second, 128 at a time
+    return true;
+  }
+}
+```
+
+```js 3:8
+// Audio Worklet Processor on Audio Thread
+class TechnoProcessor extends AudioWorkletProcessor {
+  constructor() {
+    super();
+    // Receive WASM code
+    this.port.onmessage = async ({ data: { wasmCode } }) => {
+    };
+  }
+  process(inputs, outputs) {
+    // Process 48000 samples per second, 128 at a time
+    return true;
+  }
+}
+```
+
+```js 7:10
+// Audio Worklet Processor on Audio Thread
+class TechnoProcessor extends AudioWorkletProcessor {
+  constructor() {
+    super();
+    // Receive WASM code
+    this.port.onmessage = async ({ data: { wasmCode } }) => {
+      // Instantiate WASM module
+      let {
+        instance: { exports },
+      } = await WebAssembly.instantiate(wasmCode);
+      // Grab its exported API
+      this.wasm = exports;
+      // Grab its memory
+      this.mem = this.wasm.memory.buffer;
+      this.wasm._initialize();
+    };
+  }
+  process(inputs, outputs) {
+    // Process 48000 samples per second, 128 at a time
+    return true;
+  }
+}
+```
+
+```js 11:12
+// Audio Worklet Processor on Audio Thread
+class TechnoProcessor extends AudioWorkletProcessor {
+  constructor() {
+    super();
+    // Receive WASM code
+    this.port.onmessage = async ({ data: { wasmCode } }) => {
+      // Instantiate WASM module
+      let {
+        instance: { exports },
+      } = await WebAssembly.instantiate(wasmCode);
+      // Grab its exported API
+      this.wasm = exports;
+      // Grab its memory
+      this.mem = this.wasm.memory.buffer;
+      this.wasm._initialize();
+    };
+  }
+  process(inputs, outputs) {
+    // Process 48000 samples per second, 128 at a time
+    return true;
+  }
+}
+```
+
+```js 13:14
+// Audio Worklet Processor on Audio Thread
+class TechnoProcessor extends AudioWorkletProcessor {
+  constructor() {
+    super();
+    // Receive WASM code
+    this.port.onmessage = async ({ data: { wasmCode } }) => {
+      // Instantiate WASM module
+      let {
+        instance: { exports },
+      } = await WebAssembly.instantiate(wasmCode);
+      // Grab its exported API
+      this.wasm = exports;
+      // Grab its memory
+      this.mem = this.wasm.memory.buffer;
+      this.wasm._initialize();
+    };
+  }
+  process(inputs, outputs) {
+    // Process 48000 samples per second, 128 at a time
+    return true;
+  }
+}
+```
+
+```js 21:22
+// Audio Worklet Processor on Audio Thread
+class TechnoProcessor extends AudioWorkletProcessor {
+  constructor() {
+    super();
+    // Receive WASM code
+    this.port.onmessage = async ({ data: { wasmCode } }) => {
+      // Instantiate WASM module
+      let {
+        instance: { exports },
+      } = await WebAssembly.instantiate(wasmCode);
+      // Grab its exported API
+      this.wasm = exports;
+      // Grab its memory
+      this.mem = this.wasm.memory.buffer;
+      this.wasm._initialize();
+    };
+  }
+  process(inputs, outputs) {
+    // Process 48000 samples per second, 128 at a time
+    if (!this.wasm) return true;
+    // Call the C function and get the memory pointer
+    let ptr = this.wasm.makeSomeTechno();
+    // Copy the processed audio from WASM memory to audio output
+    outputs[0][0].set(new Float32Array(this.mem, ptr, 128));
+  }
+}
+```
+
+```js 23:24
+// Audio Worklet Processor on Audio Thread
+class TechnoProcessor extends AudioWorkletProcessor {
+  constructor() {
+    super();
+    // Receive WASM code
+    this.port.onmessage = async ({ data: { wasmCode } }) => {
+      // Instantiate WASM module
+      let {
+        instance: { exports },
+      } = await WebAssembly.instantiate(wasmCode);
+      // Grab its exported API
+      this.wasm = exports;
+      // Grab its memory
+      this.mem = this.wasm.memory.buffer;
+      this.wasm._initialize();
+    };
+  }
+  process(inputs, outputs) {
+    // Process 48000 samples per second, 128 at a time
+    if (!this.wasm) return true;
+    // Call the C function and get the memory pointer
+    let ptr = this.wasm.makeSomeTechno();
+    // Copy the processed audio from WASM memory to audio output
+    outputs[0][0].set(new Float32Array(this.mem, ptr, 128));
+  }
+}
+```
+
+```js 24[23:58]
+// Audio Worklet Processor on Audio Thread
+class TechnoProcessor extends AudioWorkletProcessor {
+  constructor() {
+    super();
+    // Receive WASM code
+    this.port.onmessage = async ({ data: { wasmCode } }) => {
+      // Instantiate WASM module
+      let {
+        instance: { exports },
+      } = await WebAssembly.instantiate(wasmCode);
+      // Grab its exported API
+      this.wasm = exports;
+      // Grab its memory
+      this.mem = this.wasm.memory.buffer;
+      this.wasm._initialize();
+    };
+  }
+  process(inputs, outputs) {
+    // Process 48000 samples per second, 128 at a time
+    if (!this.wasm) return true;
+    // Call the C function and get the memory pointer
+    let ptr = this.wasm.makeSomeTechno();
+    // Copy the processed audio from WASM memory to audio output
+    outputs[0][0].set(new Float32Array(this.mem, ptr, 128));
+  }
+}
+```
+
+```js 24[5:22,59:59]
+// Audio Worklet Processor on Audio Thread
+class TechnoProcessor extends AudioWorkletProcessor {
+  constructor() {
+    super();
+    // Receive WASM code
+    this.port.onmessage = async ({ data: { wasmCode } }) => {
+      // Instantiate WASM module
+      let {
+        instance: { exports },
+      } = await WebAssembly.instantiate(wasmCode);
+      // Grab its exported API
+      this.wasm = exports;
+      // Grab its memory
+      this.mem = this.wasm.memory.buffer;
+      this.wasm._initialize();
+    };
+  }
+  process(inputs, outputs) {
+    // Process 48000 samples per second, 128 at a time
+    if (!this.wasm) return true;
+    // Call the C function and get the memory pointer
+    let ptr = this.wasm.makeSomeTechno();
+    // Copy the processed audio from WASM memory to audio output
+    outputs[0][0].set(new Float32Array(this.mem, ptr, 128));
+  }
+}
+```
+
+</CodeSurfer>
+
+---
+
+---
+
 <Audio
   versions={{
     9: 0,
@@ -1251,7 +1684,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -1305,7 +1738,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -1359,7 +1792,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -1413,7 +1846,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -1474,7 +1907,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -1535,7 +1968,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -1597,7 +2030,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -1659,7 +2092,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -1725,7 +2158,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -1793,7 +2226,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -1861,7 +2294,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -1930,7 +2363,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -2000,7 +2433,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -2071,7 +2504,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -2143,7 +2576,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -2216,7 +2649,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -2292,7 +2725,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -2368,7 +2801,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -2446,7 +2879,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -2525,7 +2958,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -2604,7 +3037,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -2684,7 +3117,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -2774,7 +3207,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -2864,7 +3297,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -2954,7 +3387,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -3044,7 +3477,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -3134,7 +3567,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -3224,7 +3657,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -3314,7 +3747,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -3405,7 +3838,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -3497,7 +3930,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -3589,7 +4022,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
@@ -3681,7 +4114,7 @@ float* makeSomeTechno() {
     bassPhase = phasor(bassPhase, bassPitch);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5)); // "Sidechaining"
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
     float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
