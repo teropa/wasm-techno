@@ -75,7 +75,7 @@ static float outputBuffer[128]; // Array of samples
 float* makeSomeTechno() {
   // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
-    outputBuffer[i] = 0.0;
+    outputBuffer[i] = 0.0f;
   }
   // Return pointer to the array
   return outputBuffer;
@@ -90,7 +90,7 @@ static float outputBuffer[128]; // Array of samples
 float* makeSomeTechno() {
   // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
-    outputBuffer[i] = 0.0;
+    outputBuffer[i] = 0.0f;
   }
   // Return pointer to the array
   return outputBuffer;
@@ -105,7 +105,7 @@ static float outputBuffer[128]; // Array of samples
 float* makeSomeTechno() {
   // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
-    outputBuffer[i] = 0.0;
+    outputBuffer[i] = 0.0f;
   }
   // Return pointer to the array
   return outputBuffer;
@@ -120,7 +120,7 @@ static float outputBuffer[128]; // Array of samples
 float* makeSomeTechno() {
   // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
-    outputBuffer[i] = 0.0;
+    outputBuffer[i] = 0.0f;
   }
   // Return pointer to the array
   return outputBuffer;
@@ -135,7 +135,7 @@ static float outputBuffer[128]; // Array of samples
 float* makeSomeTechno() {
   // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
-    outputBuffer[i] = 0.0;
+    outputBuffer[i] = 0.0f;
   }
   // Return pointer to the array
   return outputBuffer;
@@ -445,33 +445,48 @@ class TechnoProcessor extends AudioWorkletProcessor {
 
 <Audio
   versions={{
-    9: 0,
-    13: 1,
-    15: 2,
-    17: 3,
-    19: 4,
-    21: 5,
-    23: 6,
-    25: 7,
-    27: 8,
-    29: 9,
-    31: 10,
-    34: 11,
-    37: 12,
-    41: 13,
-    42: 14,
-    43: 15,
-    44: 16,
-    45: 17,
-    47: 18,
-    49: 19,
-    52: 20,
-    60: 21,
-    63: 22,
+    10: 0,
+    14: 1,
+    16: 2,
+    18: 3,
+    20: 4,
+    22: 5,
+    24: 6,
+    26: 7,
+    28: 8,
+    30: 9,
+    32: 10,
+    35: 11,
+    38: 12,
+    42: 13,
+    43: 14,
+    44: 15,
+    45: 16,
+    46: 17,
+    48: 18,
+    51: 19,
+    53: 20,
+    61: 21,
+    64: 22,
   }}
 />
 
 <CodeSurfer >
+
+```c
+// Audio Processing code in C
+
+static float outputBuffer[128]; // Array of samples
+
+float* makeSomeTechno() {
+  // Process 128 samples into the array
+  for (int i = 0; i < 128; i++) {
+    outputBuffer[i] = 0.0f;
+  }
+  // Return pointer to the array
+  return outputBuffer;
+}
+```
 
 ```c 4:6
 
@@ -479,28 +494,14 @@ class TechnoProcessor extends AudioWorkletProcessor {
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
-
-// Define phasor between 0 and 1 at a given frequency
-float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
-  return phase;
-}
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
 
 static float outputBuffer[128]; // Array of samples
-
-float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
   // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI); // Sine wave
-    kick *= 0.15f; // Make it less loud
-
-    outputBuffer[i] = kick; // Output
+    outputBuffer[i] = 0.0f;
   }
   // Return pointer to the array
   return outputBuffer;
@@ -508,34 +509,24 @@ float* makeSomeTechno() {
 
 ```
 
-```c 8:9
+```c 8:10
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
-  return phase;
 }
 
 static float outputBuffer[128]; // Array of samples
 
-float kickPhase = 0.0f; // Accumulated phase
-
 float* makeSomeTechno() {
   // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI); // Sine wave
-    kick *= 0.15f; // Make it less loud
-
-    outputBuffer[i] = kick; // Output
+    outputBuffer[i] = 0.0f;
   }
   // Return pointer to the array
   return outputBuffer;
@@ -543,34 +534,25 @@ float* makeSomeTechno() {
 
 ```
 
-```c 10
+```c 8:10
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
-  return phase;
+  phase += freq * SAMPLE_DUR; // Increment by one sample
 }
 
 static float outputBuffer[128]; // Array of samples
 
-float kickPhase = 0.0f; // Accumulated phase
-
 float* makeSomeTechno() {
   // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI); // Sine wave
-    kick *= 0.15f; // Make it less loud
-
-    outputBuffer[i] = kick; // Output
+    outputBuffer[i] = 0.0f;
   }
   // Return pointer to the array
   return outputBuffer;
@@ -578,34 +560,26 @@ float* makeSomeTechno() {
 
 ```
 
-```c 11
+```c 8:11
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
-  return phase;
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
 }
 
 static float outputBuffer[128]; // Array of samples
 
-float kickPhase = 0.0f; // Accumulated phase
-
 float* makeSomeTechno() {
   // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI); // Sine wave
-    kick *= 0.15f; // Make it less loud
-
-    outputBuffer[i] = kick; // Output
+    outputBuffer[i] = 0.0f;
   }
   // Return pointer to the array
   return outputBuffer;
@@ -613,34 +587,27 @@ float* makeSomeTechno() {
 
 ```
 
-```c 8:13
+```c 8:12
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
 static float outputBuffer[128]; // Array of samples
 
-float kickPhase = 0.0f; // Accumulated phase
-
 float* makeSomeTechno() {
   // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI); // Sine wave
-    kick *= 0.15f; // Make it less loud
-
-    outputBuffer[i] = kick; // Output
+    outputBuffer[i] = 0.0f;
   }
   // Return pointer to the array
   return outputBuffer;
@@ -654,12 +621,79 @@ float* makeSomeTechno() {
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
+  return phase;
+}
+
+static float outputBuffer[128]; // Array of samples
+
+float kickPhase = 0.0f; // Accumulated phase
+
+float* makeSomeTechno() {
+  // Process 128 samples into the array
+  for (int i = 0; i < 128; i++) {
+    float kickPitch = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickPitch);
+    outputBuffer[i] = 0.0f;
+  }
+  // Return pointer to the array
+  return outputBuffer;
+}
+
+```
+
+```c 7,25
+
+// Audio Processing code in C
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
+
+// Define a phasor that runs from 0 to 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
+  return phase;
+}
+
+static float outputBuffer[128]; // Array of samples
+
+float kickPhase = 0.0f; // Accumulated phase
+
+float* makeSomeTechno() {
+  // Process 128 samples into the array
+  for (int i = 0; i < 128; i++) {
+    float kickPitch = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    outputBuffer[i] = 0.0f;
+  }
+  // Return pointer to the array
+  return outputBuffer;
+}
+
+```
+
+```c 26
+
+// Audio Processing code in C
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
+
+// Define a phasor that runs from 0 to 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -675,7 +709,7 @@ float* makeSomeTechno() {
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= 0.15f; // Make it less loud
 
-    outputBuffer[i] = kick; // Output
+    outputBuffer[i] = 0.0f;
   }
   // Return pointer to the array
   return outputBuffer;
@@ -683,88 +717,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 24
+```c 28
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
-  return phase;
-}
-
-static float outputBuffer[128]; // Array of samples
-
-float kickPhase = 0.0f; // Accumulated phase
-
-float* makeSomeTechno() {
-  // Process 128 samples into the array
-  for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI); // Sine wave
-    kick *= 0.15f; // Make it less loud
-
-    outputBuffer[i] = kick; // Output
-  }
-  // Return pointer to the array
-  return outputBuffer;
-}
-
-```
-
-```c 25
-
-// Audio Processing code in C
-
-// Determine duration of one sample
-#define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
-
-// Define phasor between 0 and 1 at a given frequency
-float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
-  return phase;
-}
-
-static float outputBuffer[128]; // Array of samples
-
-float kickPhase = 0.0f; // Accumulated phase
-
-float* makeSomeTechno() {
-  // Process 128 samples into the array
-  for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI); // Sine wave
-    kick *= 0.15f; // Make it less loud
-
-    outputBuffer[i] = kick; // Output
-  }
-  // Return pointer to the array
-  return outputBuffer;
-}
-
-```
-
-```c 27
-
-// Audio Processing code in C
-
-// Determine duration of one sample
-#define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
-
-// Define phasor between 0 and 1 at a given frequency
-float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -794,12 +759,13 @@ float* makeSomeTechno() {
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -823,18 +789,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 17,23
+```c 18,24
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -861,18 +828,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 23:25
+```c 24:26
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -901,18 +869,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 15:17,34
+```c 16:18,35
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -945,18 +914,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 15:17,34
+```c 16:18,35
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -989,18 +959,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 15:17,34
+```c 16:18,35
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -1033,18 +1004,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 15:17,34
+```c 16:18,35
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -1077,18 +1049,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 31
+```c 32
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -1121,18 +1094,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 31
+```c 32
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -1165,18 +1139,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 31
+```c 32
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -1209,18 +1184,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 31
+```c 32
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -1253,18 +1229,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 37:41,43[27:33]
+```c 38:42,44[27:33]
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -1304,18 +1281,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 37:41,43[27:33]
+```c 38:42,44[27:33]
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -1355,18 +1333,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 41
+```c 42
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -1407,18 +1386,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 41
+```c 42
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -1459,70 +1439,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 41
+```c 42
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
-  return phase;
-}
-
-float envelope(float t, float amp, float exp) {
-  return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
-}
-
-static float outputBuffer[128]; // Array of samples
-
-unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
-
-float* makeSomeTechno() {
-  // Process 128 samples into the array
-  for (int i = 0; i < 128; i++) {
-    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
-    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
-    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
-
-    // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // More!
-    kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI); // Sine wave
-    kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
-
-    // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
-    float bass = sinf(bassPhase * TWO_PI); // Sine wave
-    bass = tanh(bass * 1.5f); // More saturation
-    bass *= 0.2f; // Amplitude
-
-    outputBuffer[i] = kick + bass; // Output
-  }
-  // Return pointer to the array
-  return outputBuffer;
-}
-
-```
-
-```c 41
-
-// Audio Processing code in C
-
-// Determine duration of one sample
-#define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
-
-// Define phasor between 0 and 1 at a given frequency
-float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -1569,12 +1498,66 @@ float* makeSomeTechno() {
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
+  return phase;
+}
+
+float envelope(float t, float amp, float exp) {
+  return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
+}
+
+static float outputBuffer[128]; // Array of samples
+
+unsigned long long tSamples = 0; // Accumulated samples
+float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
+
+float* makeSomeTechno() {
+  // Process 128 samples into the array
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+
+    // Kick
+    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
+
+    // Bass
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= 0.2f; // Amplitude
+
+    outputBuffer[i] = kick + bass; // Output
+  }
+  // Return pointer to the array
+  return outputBuffer;
+}
+
+```
+
+```c 43
+
+// Audio Processing code in C
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
+
+// Define a phasor that runs from 0 to 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -1615,18 +1598,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 42
+```c 43
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -1667,18 +1651,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 42
+```c 43
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -1719,18 +1704,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 42
+```c 43
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -1771,18 +1757,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 44:48,50[34:41]
+```c 45:49,51[34:41]
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -1829,18 +1816,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 44:48,50[34:41]
+```c 45:49,51[34:41]
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -1887,18 +1875,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 30:31
+```c 31:32
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -1947,18 +1936,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 50
+```c 51
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -2007,18 +1997,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 50
+```c 51
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -2067,18 +2058,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 19:24
+```c 20:25
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -2134,18 +2126,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 57,58[52:62]
+```c 58,59[52:62]
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -2202,18 +2195,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 57,58[48:58]
+```c 58,59[48:58]
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -2270,18 +2264,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 56
+```c 57
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -2338,18 +2333,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 15:17
+```c 16:18
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -2410,18 +2406,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 16:18
+```c 17:19
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -2484,18 +2481,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 16:18
+```c 17:19
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -2558,18 +2556,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 16:19
+```c 17:20
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -2633,18 +2632,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 16:20
+```c 17:21
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -2709,18 +2709,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 16:21
+```c 17:22
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -2786,18 +2787,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 16:22
+```c 17:23
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -2864,18 +2866,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 65:70
+```c 66:71
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -2946,18 +2949,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 65:70
+```c 66:71
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -3028,18 +3032,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 65:72
+```c 66:73
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -3112,18 +3117,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 65:72
+```c 66:73
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -3196,103 +3202,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 48
+```c 49
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
-  return phase;
-}
-
-float saw6f(float phase) {
-  // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
-}
-
-float envelope(float t, float amp, float exp) {
-  return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
-}
-
-const char chordPattern[16] = {
-  0, 1, 0, 0,
-  0, 0, 1, 0,
-  1, 0, 0, 1,
-  0, 0, 1, 0
-};
-
-static float outputBuffer[128]; // Array of samples
-
-unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
-      chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
-
-float* makeSomeTechno() {
-  // Process 128 samples into the array
-  for (int i = 0; i < 128; i++) {
-    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
-    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
-    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
-    float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
-    float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
-
-    // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // More!
-    kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI); // Sine wave
-    kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
-
-    // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
-    float bass = sinf(bassPhase * TWO_PI); // Sine wave
-    bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
-
-    // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
-    chordPhase1 = phasor(chordPhase1, chordRootPitch);
-    chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f); // Minor 3rd
-    float chord =
-      saw6f(chordPhase1 * TWO_PI) +
-      saw6f(chordPhase2 * TWO_PI) +
-      saw6f(chordPhase3 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
-    chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
-
-    outputBuffer[i] = kick + bass + chord; // Output
-  }
-  // Return pointer to the array
-  return outputBuffer;
-}
-
-```
-
-```c 67
-
-// Audio Processing code in C
-
-// Determine duration of one sample
-#define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
-
-// Define phasor between 0 and 1 at a given frequency
-float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -3348,7 +3270,6 @@ float* makeSomeTechno() {
 
     // Chords
     float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
-    if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
     chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
     chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f); // Minor 3rd
@@ -3367,18 +3288,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 67
+```c 68
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -3453,18 +3375,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 36:38
+```c 68
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -3488,16 +3411,6 @@ const char chordPattern[16] = {
   1, 0, 0, 1,
   0, 0, 1, 0
 };
-
-// Ring buffer delay line
-float delayLine[SAMPLERATE] = {0}; // Store max 1 second of samples
-int delayIndex = 0;
-float processDelay(float input, float delayTime) {
-  delayLine[delayIndex] = input; // Write current input
-  delayIndex++; // Move to next sample
-  delayIndex %= (int)(delayTime * SAMPLERATE); // Wrap if exceeding delay time
-  return delayLine[delayIndex]; // Read delayed output
-}
 
 static float outputBuffer[128]; // Array of samples
 
@@ -3549,18 +3462,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 39
+```c 37:39
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -3651,12 +3565,13 @@ float* makeSomeTechno() {
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -3747,12 +3662,13 @@ float* makeSomeTechno() {
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -3843,12 +3759,13 @@ float* makeSomeTechno() {
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -3939,12 +3856,13 @@ float* makeSomeTechno() {
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -4029,18 +3947,116 @@ float* makeSomeTechno() {
 
 ```
 
-```c 87
+```c 44
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
+  return phase;
+}
+
+float saw6f(float phase) {
+  // Add harmonics
+  return sinf(phase) +
+    sinf(phase * 2.0f) * 0.5f +
+    sinf(phase * 3.0f) * 0.33f +
+    sinf(phase * 4.0f) * 0.25f +
+    sinf(phase * 5.0f) * 0.2f +
+    sinf(phase * 6.0f) * 0.16f;
+}
+
+float envelope(float t, float amp, float exp) {
+  return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
+}
+
+const char chordPattern[16] = {
+  0, 1, 0, 0,
+  0, 0, 1, 0,
+  1, 0, 0, 1,
+  0, 0, 1, 0
+};
+
+// Ring buffer delay line
+float delayLine[SAMPLERATE] = {0}; // Store max 1 second of samples
+int delayIndex = 0;
+float processDelay(float input, float delayTime) {
+  delayLine[delayIndex] = input; // Write current input
+  delayIndex++; // Move to next sample
+  delayIndex %= (int)(delayTime * SAMPLERATE); // Wrap if exceeding delay time
+  return delayLine[delayIndex]; // Read delayed output
+}
+
+static float outputBuffer[128]; // Array of samples
+
+unsigned long long tSamples = 0; // Accumulated samples
+float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
+      chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
+
+float* makeSomeTechno() {
+  // Process 128 samples into the array
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+    float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
+    float tSixteenths = tBeats * 4.0; // Current 16th note
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+
+    // Kick
+    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
+
+    // Bass
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
+
+    // Chords
+    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
+    chordPhase1 = phasor(chordPhase1, chordRootPitch);
+    chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f); // Minor 3rd
+    float chord =
+      saw6f(chordPhase1 * TWO_PI) +
+      saw6f(chordPhase2 * TWO_PI) +
+      saw6f(chordPhase3 * TWO_PI);
+    char chordHit = chordPattern[(int)tSixteenths % 16];
+    chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
+
+    outputBuffer[i] = kick + bass + chord; // Output
+  }
+  // Return pointer to the array
+  return outputBuffer;
+}
+
+```
+
+```c 88
+
+// Audio Processing code in C
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
+
+// Define a phasor that runs from 0 to 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -4126,18 +4142,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 87
+```c 88
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -4223,18 +4240,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 39:41
+```c 40:42
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -4321,18 +4339,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 88
+```c 89
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
@@ -4419,18 +4438,19 @@ float* makeSomeTechno() {
 
 ```
 
-```c 88
+```c 89
 
 // Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
 
-// Define phasor between 0 and 1 at a given frequency
+// Define a phasor that runs from 0 to 1 at a given frequency
 float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
 }
 
