@@ -458,16 +458,16 @@ class TechnoProcessor extends AudioWorkletProcessor {
     41: 10,
     45: 11,
     48: 12,
-    52: 13,
-    53: 14,
-    54: 15,
-    55: 16,
-    56: 17,
-    58: 18,
-    61: 19,
-    63: 20,
-    71: 21,
-    74: 22,
+    53: 13,
+    55: 14,
+    56: 15,
+    57: 16,
+    58: 17,
+    62: 18,
+    64: 19,
+    66: 20,
+    74: 21,
+    77: 22,
   }}
 />
 
@@ -2858,7 +2858,7 @@ float* makeSomeTechno() {
     // Chords
     float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
-    float chord = saw6f(chordPhase * TWO_PI);
+    float chord = sinf(chordPhase * TWO_PI);
     int chordPatternIndex = (int)tSixteenths % 16; // 0-15
     char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
@@ -2871,7 +2871,7 @@ float* makeSomeTechno() {
 
 ```
 
-```c 16:18
+```c 61
 
 // Audio Processing code in C
 
@@ -2885,10 +2885,6 @@ float phasor(float phase, float freq) {
   phase += freq * SAMPLE_DUR; // Increment by one sample
   phase -= trunc(phase);      // When it reaches 1 go back to 0
   return phase;
-}
-
-float saw6f(float phase) {
-  return sinf(phase);
 }
 
 float envelope(float t, float amp, float exp) {
@@ -2949,7 +2945,7 @@ float* makeSomeTechno() {
 
 ```
 
-```c 17:19
+```c 16:20
 
 // Audio Processing code in C
 
@@ -2965,10 +2961,10 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
-  // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f;
+  return sinf(phase)
+    ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -3029,7 +3025,7 @@ float* makeSomeTechno() {
 
 ```
 
-```c 17:19
+```c 16:22
 
 // Audio Processing code in C
 
@@ -3045,10 +3041,12 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -3109,7 +3107,7 @@ float* makeSomeTechno() {
 
 ```
 
-```c 17:20
+```c 16:22
 
 // Audio Processing code in C
 
@@ -3125,11 +3123,12 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -3190,7 +3189,7 @@ float* makeSomeTechno() {
 
 ```
 
-```c 17:21
+```c 16:22
 
 // Audio Processing code in C
 
@@ -3206,12 +3205,12 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -3272,7 +3271,7 @@ float* makeSomeTechno() {
 
 ```
 
-```c 17:22
+```c 16:23
 
 // Audio Processing code in C
 
@@ -3288,13 +3287,13 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -3355,7 +3354,7 @@ float* makeSomeTechno() {
 
 ```
 
-```c 17:23
+```c 16:24
 
 // Audio Processing code in C
 
@@ -3371,14 +3370,271 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+      ;
+}
+
+float envelope(float t, float amp, float exp) {
+  float env = powf(1.0 - t, exp); // Exponentially decay from 1 to 0
+  env *= amp; // Decay from amp to 0
+  return env;
+}
+
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
+const char chordPattern[16] = {
+  0, 1, 0, 0,
+  0, 0, 1, 0,
+  1, 0, 0, 1,
+  0, 0, 1, 0
+};
+
+static float outputBuffer[128]; // Array of samples
+
+unsigned long long tSamples = 0; // Accumulated samples
+float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulate phase over time
+
+float* makeSomeTechno() {
+  // Process 128 samples into the array
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
+    float tSixteenths = tBeats * 4.0; // Current 16th note
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
+
+    // Kick
+    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
+
+    // Bass
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
+
+    // Chords
+    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordPitch);
+    float chord = saw6f(chordPhase * TWO_PI);
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
+    chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
+
+    outputBuffer[i] = kick + bass + chord; // Output
+  }
+  // Return pointer to the array
+  return outputBuffer;
+}
+
+```
+
+```c 16:25
+
+// Audio Processing code in C
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
+
+// Define a phasor that runs from 0 to 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
+  return phase;
+}
+
+// Additive sawtooth wave
+float saw6f(float phase) {
+  // Add harmonics
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+      ;
+}
+
+float envelope(float t, float amp, float exp) {
+  float env = powf(1.0 - t, exp); // Exponentially decay from 1 to 0
+  env *= amp; // Decay from amp to 0
+  return env;
+}
+
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
+const char chordPattern[16] = {
+  0, 1, 0, 0,
+  0, 0, 1, 0,
+  1, 0, 0, 1,
+  0, 0, 1, 0
+};
+
+static float outputBuffer[128]; // Array of samples
+
+unsigned long long tSamples = 0; // Accumulated samples
+float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulate phase over time
+
+float* makeSomeTechno() {
+  // Process 128 samples into the array
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
+    float tSixteenths = tBeats * 4.0; // Current 16th note
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
+
+    // Kick
+    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
+
+    // Bass
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
+
+    // Chords
+    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordPitch);
+    float chord = saw6f(chordPhase * TWO_PI);
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
+    chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
+
+    outputBuffer[i] = kick + bass + chord; // Output
+  }
+  // Return pointer to the array
+  return outputBuffer;
+}
+
+```
+
+```c 16:26
+
+// Audio Processing code in C
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
+
+// Define a phasor that runs from 0 to 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
+  return phase;
+}
+
+// Additive sawtooth wave
+float saw6f(float phase) {
+  // Add harmonics
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+    + sinf(phase * 6.0f) * 0.16f
+      ;
+}
+
+float envelope(float t, float amp, float exp) {
+  float env = powf(1.0 - t, exp); // Exponentially decay from 1 to 0
+  env *= amp; // Decay from amp to 0
+  return env;
+}
+
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
+const char chordPattern[16] = {
+  0, 1, 0, 0,
+  0, 0, 1, 0,
+  1, 0, 0, 1,
+  0, 0, 1, 0
+};
+
+static float outputBuffer[128]; // Array of samples
+
+unsigned long long tSamples = 0; // Accumulated samples
+float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulate phase over time
+
+float* makeSomeTechno() {
+  // Process 128 samples into the array
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
+    float tSixteenths = tBeats * 4.0; // Current 16th note
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
+
+    // Kick
+    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
+
+    // Bass
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
+
+    // Chords
+    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordPitch);
+    float chord = saw6f(chordPhase * TWO_PI);
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
+    chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
+
+    outputBuffer[i] = kick + bass + chord; // Output
+  }
+  // Return pointer to the array
+  return outputBuffer;
+}
+
+```
+
+```c 16:26
+
+// Audio Processing code in C
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
+
+// Define a phasor that runs from 0 to 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
+  return phase;
+}
+
+// Additive sawtooth wave
+float saw6f(float phase) {
+  // Add harmonics
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+    + sinf(phase * 6.0f) * 0.16f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -3455,14 +3711,16 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+    + sinf(phase * 6.0f) * 0.16f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -3543,14 +3801,16 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+    + sinf(phase * 6.0f) * 0.16f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -3631,14 +3891,16 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+    + sinf(phase * 6.0f) * 0.16f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -3721,14 +3983,16 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+    + sinf(phase * 6.0f) * 0.16f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -3811,14 +4075,16 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+    + sinf(phase * 6.0f) * 0.16f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -3902,14 +4168,16 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+    + sinf(phase * 6.0f) * 0.16f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -3994,14 +4262,16 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+    + sinf(phase * 6.0f) * 0.16f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -4086,14 +4356,16 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+    + sinf(phase * 6.0f) * 0.16f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -4188,14 +4460,16 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+    + sinf(phase * 6.0f) * 0.16f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -4290,14 +4564,16 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+    + sinf(phase * 6.0f) * 0.16f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -4392,14 +4668,16 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+    + sinf(phase * 6.0f) * 0.16f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -4494,14 +4772,16 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+    + sinf(phase * 6.0f) * 0.16f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -4596,14 +4876,16 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+    + sinf(phase * 6.0f) * 0.16f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -4698,14 +4980,16 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+    + sinf(phase * 6.0f) * 0.16f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -4801,14 +5085,16 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+    + sinf(phase * 6.0f) * 0.16f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -4904,14 +5190,16 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+    + sinf(phase * 6.0f) * 0.16f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -5008,14 +5296,16 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+    + sinf(phase * 6.0f) * 0.16f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
@@ -5112,14 +5402,16 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+// Additive sawtooth wave
 float saw6f(float phase) {
   // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
+  return sinf(phase)
+    + sinf(phase * 2.0f) * 0.5f
+    + sinf(phase * 3.0f) * 0.33f
+    + sinf(phase * 4.0f) * 0.25f
+    + sinf(phase * 5.0f) * 0.2f
+    + sinf(phase * 6.0f) * 0.16f
+      ;
 }
 
 float envelope(float t, float amp, float exp) {
