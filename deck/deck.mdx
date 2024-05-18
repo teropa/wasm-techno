@@ -2,6 +2,7 @@ import { CodeSurfer } from "code-surfer";
 
 import { myTheme } from "./theme";
 
+import { TitleSlide } from './TitleSlide';
 import { Audio } from "./Audio";
 
 export const theme = myTheme;
@@ -10,7 +11,7 @@ export const theme = myTheme;
   <title>Making Minimal Techno with WebAssembly And a C Compiler</title>
 </Head>
 
-# Hello
+<TitleSlide />
 
 ---
 
@@ -69,8 +70,7 @@ class TechnoProcessor extends AudioWorkletProcessor {
 ```c
 // Audio Processing code in C
 
-// Array of samples
-static float outputBuffer[128];
+static float outputBuffer[128]; // Array of samples
 
 float* makeSomeTechno() {
   // Process 128 samples into the array
@@ -82,11 +82,10 @@ float* makeSomeTechno() {
 }
 ```
 
-```c 3:4
+```c 3
 // Audio Processing code in C
 
-// Array of samples
-static float outputBuffer[128];
+static float outputBuffer[128]; // Array of samples
 
 float* makeSomeTechno() {
   // Process 128 samples into the array
@@ -98,11 +97,10 @@ float* makeSomeTechno() {
 }
 ```
 
-```c 6
+```c 5
 // Audio Processing code in C
 
-// Array of samples
-static float outputBuffer[128];
+static float outputBuffer[128]; // Array of samples
 
 float* makeSomeTechno() {
   // Process 128 samples into the array
@@ -114,11 +112,10 @@ float* makeSomeTechno() {
 }
 ```
 
-```c 6:10
+```c 5:9
 // Audio Processing code in C
 
-// Array of samples
-static float outputBuffer[128];
+static float outputBuffer[128]; // Array of samples
 
 float* makeSomeTechno() {
   // Process 128 samples into the array
@@ -130,11 +127,10 @@ float* makeSomeTechno() {
 }
 ```
 
-```c 6:12
+```c 5:11
 // Audio Processing code in C
 
-// Array of samples
-static float outputBuffer[128];
+static float outputBuffer[128]; // Array of samples
 
 float* makeSomeTechno() {
   // Process 128 samples into the array
@@ -477,7 +473,9 @@ class TechnoProcessor extends AudioWorkletProcessor {
 
 <CodeSurfer >
 
-```c 2:4
+```c 4:6
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -490,9 +488,12 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+static float outputBuffer[128]; // Array of samples
+
 float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float kickPitch = 200.0f; // Hz
     kickPhase = phasor(kickPhase, kickPitch);
@@ -501,12 +502,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 6:7
+```c 8:9
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -519,9 +523,12 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+static float outputBuffer[128]; // Array of samples
+
 float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float kickPitch = 200.0f; // Hz
     kickPhase = phasor(kickPhase, kickPitch);
@@ -530,12 +537,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 8
+```c 10
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -548,9 +558,12 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+static float outputBuffer[128]; // Array of samples
+
 float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float kickPitch = 200.0f; // Hz
     kickPhase = phasor(kickPhase, kickPitch);
@@ -559,12 +572,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 9
+```c 11
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -577,9 +593,12 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+static float outputBuffer[128]; // Array of samples
+
 float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float kickPitch = 200.0f; // Hz
     kickPhase = phasor(kickPhase, kickPitch);
@@ -588,12 +607,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 6:11
+```c 8:13
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -606,9 +628,12 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+static float outputBuffer[128]; // Array of samples
+
 float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float kickPitch = 200.0f; // Hz
     kickPhase = phasor(kickPhase, kickPitch);
@@ -617,12 +642,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 13,17:18
+```c 17,22:23
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -635,9 +663,12 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+static float outputBuffer[128]; // Array of samples
+
 float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float kickPitch = 200.0f; // Hz
     kickPhase = phasor(kickPhase, kickPitch);
@@ -646,12 +677,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 19
+```c 24
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -664,9 +698,12 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+static float outputBuffer[128]; // Array of samples
+
 float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float kickPitch = 200.0f; // Hz
     kickPhase = phasor(kickPhase, kickPitch);
@@ -675,12 +712,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 20
+```c 25
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -693,9 +733,12 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+static float outputBuffer[128]; // Array of samples
+
 float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float kickPitch = 200.0f; // Hz
     kickPhase = phasor(kickPhase, kickPitch);
@@ -704,12 +747,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 22
+```c 27
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -722,9 +768,12 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+static float outputBuffer[128]; // Array of samples
+
 float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float kickPitch = 200.0f; // Hz
     kickPhase = phasor(kickPhase, kickPitch);
@@ -733,6 +782,7 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
@@ -740,6 +790,8 @@ float* makeSomeTechno() {
 
 ```c
 
+// Audio Processing code in C
+
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
 #define SAMPLE_DUR 1.0f / SAMPLERATE
@@ -751,9 +803,12 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+static float outputBuffer[128]; // Array of samples
+
 float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float kickPitch = 200.0f; // Hz
     kickPhase = phasor(kickPhase, kickPitch);
@@ -762,12 +817,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 13,18
+```c 17,23
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -780,10 +838,13 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
 
@@ -794,12 +855,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 18:20
+```c 23:25
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -812,10 +876,13 @@ float phasor(float phase, float freq) {
   return phase;
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -828,12 +895,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 13:15,29
+```c 15:17,34
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -850,10 +920,13 @@ float envelope(float t, float amp) {
   return (1.0 - t) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -866,12 +939,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 13:15,29
+```c 15:17,34
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -888,10 +964,13 @@ float envelope(float t, float amp) {
   return (1.0 - t) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -904,12 +983,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 13:15,29
+```c 15:17,34
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -926,10 +1008,13 @@ float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -942,12 +1027,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 13:15,29
+```c 15:17,34
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -964,10 +1052,13 @@ float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -980,12 +1071,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 26
+```c 31
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1002,10 +1096,13 @@ float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1018,12 +1115,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 26
+```c 31
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1040,10 +1140,13 @@ float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1056,12 +1159,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 26
+```c 31
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1078,10 +1184,13 @@ float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1094,12 +1203,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 26
+```c 31
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1116,10 +1228,13 @@ float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1132,12 +1247,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 32:36,38[27:33]
+```c 37:41,43[27:33]
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1153,11 +1271,14 @@ float phasor(float phase, float freq) {
 float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
+
+static float outputBuffer[128]; // Array of samples
 
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1177,12 +1298,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 32:36,38[27:33]
+```c 37:41,43[27:33]
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1199,10 +1323,13 @@ float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1222,12 +1349,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 36
+```c 41
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1244,10 +1374,13 @@ float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1268,12 +1401,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 36
+```c 41
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1290,10 +1426,13 @@ float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1314,12 +1453,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 36
+```c 41
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1336,10 +1478,13 @@ float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1360,12 +1505,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 36
+```c 41
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1382,10 +1530,13 @@ float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1406,12 +1557,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 37
+```c 42
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1428,10 +1582,13 @@ float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1452,12 +1609,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 37
+```c 42
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1474,10 +1634,13 @@ float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1498,12 +1661,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 37
+```c 42
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1520,10 +1686,13 @@ float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1544,12 +1713,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 37
+```c 42
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1566,10 +1738,13 @@ float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1590,12 +1765,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 39:43,45[34:41]
+```c 44:48,50[34:41]
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1611,11 +1789,14 @@ float phasor(float phase, float freq) {
 float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
+
+static float outputBuffer[128]; // Array of samples
 
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1642,12 +1823,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 39:43,45[34:41]
+```c 44:48,50[34:41]
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1664,10 +1848,13 @@ float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1694,12 +1881,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 25:26
+```c 30:31
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1716,10 +1906,13 @@ float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1748,12 +1941,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 45
+```c 50
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1770,10 +1966,13 @@ float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1802,12 +2001,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 45
+```c 50
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1824,10 +2026,13 @@ float envelope(float t, float amp, float exp) {
   return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1856,12 +2061,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 17:22
+```c 19:24
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1885,10 +2093,13 @@ const char chordPattern[16] = {
   0, 0, 1, 0
 };
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1917,12 +2128,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 52,53[48:58]
+```c 57,58[52:62]
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -1946,10 +2160,13 @@ const char chordPattern[16] = {
   0, 0, 1, 0
 };
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -1979,12 +2196,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 52,53[48:58]
+```c 57,58[48:58]
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -2008,10 +2228,13 @@ const char chordPattern[16] = {
   0, 0, 1, 0
 };
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -2041,12 +2264,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 51
+```c 56
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -2070,10 +2296,13 @@ const char chordPattern[16] = {
   0, 0, 1, 0
 };
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -2103,12 +2332,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 13:15
+```c 15:17
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -2136,10 +2368,13 @@ const char chordPattern[16] = {
   0, 0, 1, 0
 };
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -2169,12 +2404,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 14:16
+```c 16:18
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -2204,10 +2442,13 @@ const char chordPattern[16] = {
   0, 0, 1, 0
 };
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -2237,12 +2478,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 14:16
+```c 16:18
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -2272,10 +2516,13 @@ const char chordPattern[16] = {
   0, 0, 1, 0
 };
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -2305,12 +2552,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 14:17
+```c 16:19
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -2341,10 +2591,13 @@ const char chordPattern[16] = {
   0, 0, 1, 0
 };
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -2374,12 +2627,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 14:18
+```c 16:20
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -2411,10 +2667,13 @@ const char chordPattern[16] = {
   0, 0, 1, 0
 };
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -2444,12 +2703,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 14:19
+```c 16:21
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -2482,10 +2744,13 @@ const char chordPattern[16] = {
   0, 0, 1, 0
 };
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -2515,12 +2780,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 14:20
+```c 16:22
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -2554,10 +2822,13 @@ const char chordPattern[16] = {
   0, 0, 1, 0
 };
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulated phase
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -2587,12 +2858,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 60:65
+```c 65:70
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -2625,12 +2899,15 @@ const char chordPattern[16] = {
   1, 0, 0, 1,
   0, 0, 1, 0
 };
+
+static float outputBuffer[128]; // Array of samples
 
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
       chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -2663,12 +2940,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 60:65
+```c 65:70
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -2702,11 +2982,14 @@ const char chordPattern[16] = {
   0, 0, 1, 0
 };
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
       chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -2739,12 +3022,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 60:67
+```c 65:72
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -2778,11 +3064,14 @@ const char chordPattern[16] = {
   0, 0, 1, 0
 };
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
       chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -2817,12 +3106,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 60:67
+```c 65:72
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -2856,11 +3148,14 @@ const char chordPattern[16] = {
   0, 0, 1, 0
 };
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
       chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -2895,12 +3190,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 43
+```c 48
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -2934,90 +3232,14 @@ const char chordPattern[16] = {
   0, 0, 1, 0
 };
 
-unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
-      chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
-
-float* makeSomeTechno() {
-  for (int i = 0; i < 128; i++) {
-    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
-    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
-    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
-    float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
-    float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
-
-    // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // More!
-    kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI); // Sine wave
-    kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
-
-    // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
-    float bass = sinf(bassPhase * TWO_PI); // Sine wave
-    bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
-
-    // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
-    chordPhase1 = phasor(chordPhase1, chordRootPitch);
-    chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f); // Minor 3rd
-    float chord =
-      saw6f(chordPhase1 * TWO_PI) +
-      saw6f(chordPhase2 * TWO_PI) +
-      saw6f(chordPhase3 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
-    chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
-
-    outputBuffer[i] = kick + bass + chord; // Output
-  }
-  return outputBuffer;
-}
-
-```
-
-```c 62
-
-// Determine duration of one sample
-#define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
-
-// Define phasor between 0 and 1 at a given frequency
-float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
-  return phase;
-}
-
-float saw6f(float phase) {
-  // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
-}
-
-float envelope(float t, float amp, float exp) {
-  return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
-}
-
-const char chordPattern[16] = {
-  0, 1, 0, 0,
-  0, 0, 1, 0,
-  1, 0, 0, 1,
-  0, 0, 1, 0
-};
+static float outputBuffer[128]; // Array of samples
 
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
       chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -3041,7 +3263,6 @@ float* makeSomeTechno() {
 
     // Chords
     float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
-    if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
     chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
     chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f); // Minor 3rd
@@ -3054,12 +3275,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 62
+```c 67
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -3093,11 +3317,14 @@ const char chordPattern[16] = {
   0, 0, 1, 0
 };
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
       chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -3134,12 +3361,101 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 34:36
+```c 67
+
+// Audio Processing code in C
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
+
+// Define phasor between 0 and 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
+  return phase;
+}
+
+float saw6f(float phase) {
+  // Add harmonics
+  return sinf(phase) +
+    sinf(phase * 2.0f) * 0.5f +
+    sinf(phase * 3.0f) * 0.33f +
+    sinf(phase * 4.0f) * 0.25f +
+    sinf(phase * 5.0f) * 0.2f +
+    sinf(phase * 6.0f) * 0.16f;
+}
+
+float envelope(float t, float amp, float exp) {
+  return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
+}
+
+const char chordPattern[16] = {
+  0, 1, 0, 0,
+  0, 0, 1, 0,
+  1, 0, 0, 1,
+  0, 0, 1, 0
+};
+
+static float outputBuffer[128]; // Array of samples
+
+unsigned long long tSamples = 0; // Accumulated samples
+float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
+      chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
+
+float* makeSomeTechno() {
+  // Process 128 samples into the array
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+    float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
+    float tSixteenths = tBeats * 4.0; // Current 16th note
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+
+    // Kick
+    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
+
+    // Bass
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
+
+    // Chords
+    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
+    chordPhase1 = phasor(chordPhase1, chordRootPitch);
+    chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f); // Minor 3rd
+    float chord =
+      saw6f(chordPhase1 * TWO_PI) +
+      saw6f(chordPhase2 * TWO_PI) +
+      saw6f(chordPhase3 * TWO_PI);
+    char chordHit = chordPattern[(int)tSixteenths % 16];
+    chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
+
+    outputBuffer[i] = kick + bass + chord; // Output
+  }
+  // Return pointer to the array
+  return outputBuffer;
+}
+
+```
+
+```c 36:38
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -3183,11 +3499,14 @@ float processDelay(float input, float delayTime) {
   return delayLine[delayIndex]; // Read delayed output
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
       chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -3224,186 +3543,7 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
-  return outputBuffer;
-}
-
-```
-
-```c 37
-
-// Determine duration of one sample
-#define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
-
-// Define phasor between 0 and 1 at a given frequency
-float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
-  return phase;
-}
-
-float saw6f(float phase) {
-  // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
-}
-
-float envelope(float t, float amp, float exp) {
-  return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
-}
-
-const char chordPattern[16] = {
-  0, 1, 0, 0,
-  0, 0, 1, 0,
-  1, 0, 0, 1,
-  0, 0, 1, 0
-};
-
-// Ring buffer delay line
-float delayLine[SAMPLERATE] = {0}; // Store max 1 second of samples
-int delayIndex = 0;
-float processDelay(float input, float delayTime) {
-  delayLine[delayIndex] = input; // Write current input
-  delayIndex++; // Move to next sample
-  delayIndex %= (int)(delayTime * SAMPLERATE); // Wrap if exceeding delay time
-  return delayLine[delayIndex]; // Read delayed output
-}
-
-unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
-      chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
-
-float* makeSomeTechno() {
-  for (int i = 0; i < 128; i++) {
-    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
-    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
-    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
-    float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
-    float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
-
-    // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // More!
-    kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI); // Sine wave
-    kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
-
-    // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
-    float bass = sinf(bassPhase * TWO_PI); // Sine wave
-    bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
-
-    // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
-    if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
-    chordPhase1 = phasor(chordPhase1, chordRootPitch);
-    chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f); // Minor 3rd
-    float chord =
-      saw6f(chordPhase1 * TWO_PI) +
-      saw6f(chordPhase2 * TWO_PI) +
-      saw6f(chordPhase3 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
-    chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
-
-    outputBuffer[i] = kick + bass + chord; // Output
-  }
-  return outputBuffer;
-}
-
-```
-
-```c 38
-
-// Determine duration of one sample
-#define SAMPLERATE 48000.0f
-#define SAMPLE_DUR 1.0f / SAMPLERATE
-
-// Define phasor between 0 and 1 at a given frequency
-float phasor(float phase, float freq) {
-  phase += SAMPLE_DUR * freq; // Increment at every sample
-  phase -= trunc(phase);      // Keep between 0-1
-  return phase;
-}
-
-float saw6f(float phase) {
-  // Add harmonics
-  return sinf(phase) +
-    sinf(phase * 2.0f) * 0.5f +
-    sinf(phase * 3.0f) * 0.33f +
-    sinf(phase * 4.0f) * 0.25f +
-    sinf(phase * 5.0f) * 0.2f +
-    sinf(phase * 6.0f) * 0.16f;
-}
-
-float envelope(float t, float amp, float exp) {
-  return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
-}
-
-const char chordPattern[16] = {
-  0, 1, 0, 0,
-  0, 0, 1, 0,
-  1, 0, 0, 1,
-  0, 0, 1, 0
-};
-
-// Ring buffer delay line
-float delayLine[SAMPLERATE] = {0}; // Store max 1 second of samples
-int delayIndex = 0;
-float processDelay(float input, float delayTime) {
-  delayLine[delayIndex] = input; // Write current input
-  delayIndex++; // Move to next sample
-  delayIndex %= (int)(delayTime * SAMPLERATE); // Wrap if exceeding delay time
-  return delayLine[delayIndex]; // Read delayed output
-}
-
-unsigned long long tSamples = 0; // Accumulated samples
-float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
-      chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
-
-float* makeSomeTechno() {
-  for (int i = 0; i < 128; i++) {
-    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
-    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
-    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
-    float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
-    float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
-
-    // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // More!
-    kickPhase = phasor(kickPhase, kickPitch);
-    float kick = sin(kickPhase * TWO_PI); // Sine wave
-    kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
-
-    // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
-    float bass = sinf(bassPhase * TWO_PI); // Sine wave
-    bass = tanh(bass * 1.5f); // More saturation
-    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
-
-    // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
-    if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
-    chordPhase1 = phasor(chordPhase1, chordRootPitch);
-    chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f); // Minor 3rd
-    float chord =
-      saw6f(chordPhase1 * TWO_PI) +
-      saw6f(chordPhase2 * TWO_PI) +
-      saw6f(chordPhase3 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
-    chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
-
-    outputBuffer[i] = kick + bass + chord; // Output
-  }
+  // Return pointer to the array
   return outputBuffer;
 }
 
@@ -3411,6 +3551,8 @@ float* makeSomeTechno() {
 
 ```c 39
 
+// Audio Processing code in C
+
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
 #define SAMPLE_DUR 1.0f / SAMPLERATE
@@ -3453,11 +3595,14 @@ float processDelay(float input, float delayTime) {
   return delayLine[delayIndex]; // Read delayed output
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
       chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -3494,6 +3639,7 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
@@ -3501,6 +3647,8 @@ float* makeSomeTechno() {
 
 ```c 40
 
+// Audio Processing code in C
+
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
 #define SAMPLE_DUR 1.0f / SAMPLERATE
@@ -3543,11 +3691,14 @@ float processDelay(float input, float delayTime) {
   return delayLine[delayIndex]; // Read delayed output
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
       chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -3584,6 +3735,7 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
@@ -3591,6 +3743,8 @@ float* makeSomeTechno() {
 
 ```c 41
 
+// Audio Processing code in C
+
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
 #define SAMPLE_DUR 1.0f / SAMPLERATE
@@ -3633,11 +3787,14 @@ float processDelay(float input, float delayTime) {
   return delayLine[delayIndex]; // Read delayed output
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
       chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -3674,12 +3831,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 82
+```c 42
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -3723,11 +3883,206 @@ float processDelay(float input, float delayTime) {
   return delayLine[delayIndex]; // Read delayed output
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
       chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+    float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
+    float tSixteenths = tBeats * 4.0; // Current 16th note
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+
+    // Kick
+    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
+
+    // Bass
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
+
+    // Chords
+    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
+    chordPhase1 = phasor(chordPhase1, chordRootPitch);
+    chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f); // Minor 3rd
+    float chord =
+      saw6f(chordPhase1 * TWO_PI) +
+      saw6f(chordPhase2 * TWO_PI) +
+      saw6f(chordPhase3 * TWO_PI);
+    char chordHit = chordPattern[(int)tSixteenths % 16];
+    chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
+
+    outputBuffer[i] = kick + bass + chord; // Output
+  }
+  // Return pointer to the array
+  return outputBuffer;
+}
+
+```
+
+```c 43
+
+// Audio Processing code in C
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
+
+// Define phasor between 0 and 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
+  return phase;
+}
+
+float saw6f(float phase) {
+  // Add harmonics
+  return sinf(phase) +
+    sinf(phase * 2.0f) * 0.5f +
+    sinf(phase * 3.0f) * 0.33f +
+    sinf(phase * 4.0f) * 0.25f +
+    sinf(phase * 5.0f) * 0.2f +
+    sinf(phase * 6.0f) * 0.16f;
+}
+
+float envelope(float t, float amp, float exp) {
+  return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
+}
+
+const char chordPattern[16] = {
+  0, 1, 0, 0,
+  0, 0, 1, 0,
+  1, 0, 0, 1,
+  0, 0, 1, 0
+};
+
+// Ring buffer delay line
+float delayLine[SAMPLERATE] = {0}; // Store max 1 second of samples
+int delayIndex = 0;
+float processDelay(float input, float delayTime) {
+  delayLine[delayIndex] = input; // Write current input
+  delayIndex++; // Move to next sample
+  delayIndex %= (int)(delayTime * SAMPLERATE); // Wrap if exceeding delay time
+  return delayLine[delayIndex]; // Read delayed output
+}
+
+static float outputBuffer[128]; // Array of samples
+
+unsigned long long tSamples = 0; // Accumulated samples
+float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
+      chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
+
+float* makeSomeTechno() {
+  // Process 128 samples into the array
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time in beat (0-1)
+    float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
+    float tSixteenths = tBeats * 4.0; // Current 16th note
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+
+    // Kick
+    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // More!
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
+
+    // Bass
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
+
+    // Chords
+    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
+    chordPhase1 = phasor(chordPhase1, chordRootPitch);
+    chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f); // Minor 3rd
+    float chord =
+      saw6f(chordPhase1 * TWO_PI) +
+      saw6f(chordPhase2 * TWO_PI) +
+      saw6f(chordPhase3 * TWO_PI);
+    char chordHit = chordPattern[(int)tSixteenths % 16];
+    chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
+
+    outputBuffer[i] = kick + bass + chord; // Output
+  }
+  // Return pointer to the array
+  return outputBuffer;
+}
+
+```
+
+```c 87
+
+// Audio Processing code in C
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE
+
+// Define phasor between 0 and 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += SAMPLE_DUR * freq; // Increment at every sample
+  phase -= trunc(phase);      // Keep between 0-1
+  return phase;
+}
+
+float saw6f(float phase) {
+  // Add harmonics
+  return sinf(phase) +
+    sinf(phase * 2.0f) * 0.5f +
+    sinf(phase * 3.0f) * 0.33f +
+    sinf(phase * 4.0f) * 0.25f +
+    sinf(phase * 5.0f) * 0.2f +
+    sinf(phase * 6.0f) * 0.16f;
+}
+
+float envelope(float t, float amp, float exp) {
+  return powf(1.0 - t, exp) * amp; // Decay from amp to 0 over time
+}
+
+const char chordPattern[16] = {
+  0, 1, 0, 0,
+  0, 0, 1, 0,
+  1, 0, 0, 1,
+  0, 0, 1, 0
+};
+
+// Ring buffer delay line
+float delayLine[SAMPLERATE] = {0}; // Store max 1 second of samples
+int delayIndex = 0;
+float processDelay(float input, float delayTime) {
+  delayLine[delayIndex] = input; // Write current input
+  delayIndex++; // Move to next sample
+  delayIndex %= (int)(delayTime * SAMPLERATE); // Wrap if exceeding delay time
+  return delayLine[delayIndex]; // Read delayed output
+}
+
+static float outputBuffer[128]; // Array of samples
+
+unsigned long long tSamples = 0; // Accumulated samples
+float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
+      chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
+
+float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -3765,12 +4120,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 82
+```c 87
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -3814,11 +4172,14 @@ float processDelay(float input, float delayTime) {
   return delayLine[delayIndex]; // Read delayed output
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
       chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -3856,12 +4217,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 37:39
+```c 39:41
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -3906,11 +4270,14 @@ float processDelay(float input, float feedback, float delayTime) {
   return delayLine[delayIndex]; // Read delayed output
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
       chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -3948,12 +4315,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 83
+```c 88
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -3998,11 +4368,14 @@ float processDelay(float input, float feedback, float delayTime) {
   return delayLine[delayIndex]; // Read delayed output
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
       chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -4040,12 +4413,15 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
 ```
 
-```c 83
+```c 88
+
+// Audio Processing code in C
 
 // Determine duration of one sample
 #define SAMPLERATE 48000.0f
@@ -4090,11 +4466,14 @@ float processDelay(float input, float feedback, float delayTime) {
   return delayLine[delayIndex]; // Read delayed output
 }
 
+static float outputBuffer[128]; // Array of samples
+
 unsigned long long tSamples = 0; // Accumulated samples
 float kickPhase = 0.0f, bassPhase = 0.0f, // Accumulated phase
       chordPhase1 = 0.0f, chordPhase2 = 0.0f, chordPhase3 = 0.0f;
 
 float* makeSomeTechno() {
+  // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
@@ -4132,6 +4511,7 @@ float* makeSomeTechno() {
 
     outputBuffer[i] = kick + bass + chord; // Output
   }
+  // Return pointer to the array
   return outputBuffer;
 }
 
