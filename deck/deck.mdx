@@ -453,21 +453,21 @@ class TechnoProcessor extends AudioWorkletProcessor {
     29: 5,
     32: 6,
     34: 7,
-    36: 8,
+    37: 8,
     39: 9,
     41: 10,
-    44: 11,
-    47: 12,
-    51: 13,
-    52: 14,
-    53: 15,
-    54: 16,
-    55: 17,
-    57: 18,
-    60: 19,
-    62: 20,
-    70: 21,
-    73: 22,
+    45: 11,
+    48: 12,
+    52: 13,
+    53: 14,
+    54: 15,
+    55: 16,
+    56: 17,
+    58: 18,
+    61: 19,
+    63: 20,
+    71: 21,
+    74: 22,
   }}
 />
 
@@ -1930,7 +1930,7 @@ float* makeSomeTechno() {
 
 ```
 
-```c 44
+```c 34:45
 
 // Audio Processing code in C
 
@@ -2205,7 +2205,7 @@ float* makeSomeTechno() {
 
 ```
 
-```c 47:51,53[34:41]
+```c 47:53
 
 // Audio Processing code in C
 
@@ -2253,7 +2253,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = sinf(chordPhase * TWO_PI);
     chord *= envelope(tBeatFrac, 0.1f, 3.0f);
@@ -2266,7 +2266,7 @@ float* makeSomeTechno() {
 
 ```
 
-```c 47:51,53[34:41]
+```c 47:53
 
 // Audio Processing code in C
 
@@ -2314,7 +2314,68 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordPitch);
+    float chord = sinf(chordPhase * TWO_PI);
+    chord *= envelope(tBeatFrac, 0.1f, 3.0f);
+
+    outputBuffer[i] = kick + bass + chord; // Output
+  }
+  // Return pointer to the array
+  return outputBuffer;
+}
+
+```
+
+```c 47:53
+
+// Audio Processing code in C
+
+// Determine duration of one sample
+#define SAMPLERATE 48000.0f
+#define SAMPLE_DUR 1.0f / SAMPLERATE // ~0.02ms
+#define TWO_PI 6.2831853f
+
+// Define a phasor that runs from 0 to 1 at a given frequency
+float phasor(float phase, float freq) {
+  phase += freq * SAMPLE_DUR; // Increment by one sample
+  phase -= trunc(phase);      // When it reaches 1 go back to 0
+  return phase;
+}
+
+float envelope(float t, float amp, float exp) {
+  float env = powf(1.0 - t, exp); // Exponentially decay from 1 to 0
+  env *= amp; // Decay from amp to 0
+  return env;
+}
+
+static float outputBuffer[128]; // Array of samples
+
+unsigned long long tSamples = 0; // Accumulated samples
+float kickPhase = 0.0f, bassPhase = 0.0f, chordPhase = 0.0f; // Accumulate phase over time
+
+float* makeSomeTechno() {
+  // Process 128 samples into the array
+  for (int i = 0; i < 128; i++) {
+    float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
+    float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
+    float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
+
+    // Kick
+    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickPitch);
+    float kick = sin(kickPhase * TWO_PI); // Sine wave
+    kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
+
+    // Bass
+    float bassPitch = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassPitch);
+    float bass = sinf(bassPhase * TWO_PI); // Sine wave
+    bass = tanh(bass * 1.5f); // More saturation
+    bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
+
+    // Chords
+    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = sinf(chordPhase * TWO_PI);
     chord *= envelope(tBeatFrac, 0.1f, 3.0f);
@@ -2361,7 +2422,7 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -2377,7 +2438,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = sinf(chordPhase * TWO_PI);
     chord *= envelope(tBeatFrac, 0.1f, 3.0f);
@@ -2424,7 +2485,7 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -2440,7 +2501,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = sinf(chordPhase * TWO_PI);
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f);
@@ -2487,7 +2548,7 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -2503,7 +2564,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = sinf(chordPhase * TWO_PI);
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f);
@@ -2516,7 +2577,7 @@ float* makeSomeTechno() {
 
 ```
 
-```c 22:27
+```c 22:29
 
 // Audio Processing code in C
 
@@ -2538,6 +2599,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -2557,7 +2620,7 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -2573,7 +2636,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = sinf(chordPhase * TWO_PI);
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f);
@@ -2586,7 +2649,7 @@ float* makeSomeTechno() {
 
 ```
 
-```c 60,61[52:62]
+```c 62:64
 
 // Audio Processing code in C
 
@@ -2608,6 +2671,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -2627,7 +2692,7 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -2643,10 +2708,11 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = sinf(chordPhase * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -2657,7 +2723,7 @@ float* makeSomeTechno() {
 
 ```
 
-```c 60,61[48:58]
+```c 62:64
 
 // Audio Processing code in C
 
@@ -2679,6 +2745,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -2698,7 +2766,7 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -2714,10 +2782,11 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = sinf(chordPhase * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -2728,7 +2797,7 @@ float* makeSomeTechno() {
 
 ```
 
-```c 59
+```c 61
 
 // Audio Processing code in C
 
@@ -2750,6 +2819,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -2769,7 +2840,7 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -2785,10 +2856,11 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = saw6f(chordPhase * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -2825,6 +2897,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -2844,7 +2918,7 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -2860,10 +2934,11 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = saw6f(chordPhase * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -2902,6 +2977,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -2921,7 +2998,7 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -2937,10 +3014,11 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = saw6f(chordPhase * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -2979,6 +3057,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -2998,7 +3078,7 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -3014,10 +3094,11 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = saw6f(chordPhase * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -3057,6 +3138,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -3076,7 +3159,7 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -3092,10 +3175,11 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = saw6f(chordPhase * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -3136,6 +3220,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -3155,7 +3241,7 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -3171,10 +3257,11 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = saw6f(chordPhase * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -3216,6 +3303,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -3235,7 +3324,7 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -3251,10 +3340,11 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = saw6f(chordPhase * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -3297,6 +3387,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -3316,7 +3408,7 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -3332,10 +3424,11 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase = phasor(chordPhase, chordPitch);
     float chord = saw6f(chordPhase * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -3378,6 +3471,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -3398,7 +3493,7 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -3414,13 +3509,14 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordRootPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
     chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -3463,6 +3559,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -3483,7 +3581,7 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -3499,13 +3597,14 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordRootPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
     chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -3548,6 +3647,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -3568,7 +3669,7 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -3584,7 +3685,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordRootPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
     chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
     chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f); // Minor 3rd
@@ -3592,7 +3693,8 @@ float* makeSomeTechno() {
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
       saw6f(chordPhase3 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -3635,6 +3737,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -3655,7 +3759,7 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -3671,7 +3775,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordRootPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
     chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
     chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f); // Minor 3rd
@@ -3679,7 +3783,8 @@ float* makeSomeTechno() {
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
       saw6f(chordPhase3 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -3722,6 +3827,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -3743,7 +3850,7 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -3759,7 +3866,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordRootPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
     chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
     chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f); // Minor 3rd
@@ -3767,7 +3874,8 @@ float* makeSomeTechno() {
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
       saw6f(chordPhase3 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -3810,6 +3918,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -3831,7 +3941,7 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -3847,7 +3957,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordRootPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
     chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
@@ -3856,7 +3966,8 @@ float* makeSomeTechno() {
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
       saw6f(chordPhase3 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -3898,6 +4009,9 @@ float envelope(float t, float amp, float exp) {
   env *= amp; // Decay from amp to 0
   return env;
 }
+
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -3919,7 +4033,7 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -3935,7 +4049,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordRootPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
     chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
@@ -3944,7 +4058,8 @@ float* makeSomeTechno() {
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
       saw6f(chordPhase3 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -3987,6 +4102,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -4018,7 +4135,7 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -4034,7 +4151,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordRootPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
     chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
@@ -4043,7 +4160,8 @@ float* makeSomeTechno() {
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
       saw6f(chordPhase3 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -4086,6 +4204,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -4117,7 +4237,7 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -4133,7 +4253,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordRootPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
     chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
@@ -4142,7 +4262,8 @@ float* makeSomeTechno() {
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
       saw6f(chordPhase3 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -4185,6 +4306,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -4216,7 +4339,7 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -4232,7 +4355,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordRootPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
     chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
@@ -4241,7 +4364,8 @@ float* makeSomeTechno() {
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
       saw6f(chordPhase3 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -4284,6 +4408,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -4315,7 +4441,7 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -4331,7 +4457,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordRootPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
     chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
@@ -4340,7 +4466,8 @@ float* makeSomeTechno() {
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
       saw6f(chordPhase3 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -4383,6 +4510,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -4414,7 +4543,7 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -4430,7 +4559,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordRootPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
     chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
@@ -4439,7 +4568,8 @@ float* makeSomeTechno() {
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
       saw6f(chordPhase3 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -4482,6 +4612,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -4513,7 +4645,7 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -4529,7 +4661,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordRootPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
     chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
@@ -4538,7 +4670,8 @@ float* makeSomeTechno() {
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
       saw6f(chordPhase3 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
 
     outputBuffer[i] = kick + bass + chord; // Output
@@ -4549,7 +4682,7 @@ float* makeSomeTechno() {
 
 ```
 
-```c 90
+```c 93
 
 // Audio Processing code in C
 
@@ -4581,6 +4714,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -4612,7 +4747,7 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -4628,7 +4763,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordRootPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
     chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
@@ -4637,7 +4772,8 @@ float* makeSomeTechno() {
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
       saw6f(chordPhase3 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
     chord = chord + processDelay(chord, 0.375f) * 0.4f; // Dotted 8th delay
 
@@ -4649,7 +4785,7 @@ float* makeSomeTechno() {
 
 ```
 
-```c 90
+```c 93
 
 // Audio Processing code in C
 
@@ -4681,6 +4817,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -4712,7 +4850,7 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -4728,7 +4866,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordRootPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
     chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
@@ -4737,7 +4875,8 @@ float* makeSomeTechno() {
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
       saw6f(chordPhase3 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f) * chordHit;
     chord = chord + processDelay(chord, 0.375f) * 0.4f; // Dotted 8th delay
 
@@ -4780,6 +4919,9 @@ float envelope(float t, float amp, float exp) {
   env *= amp; // Decay from amp to 0
   return env;
 }
+
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -4812,7 +4954,7 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -4828,7 +4970,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordRootPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
     chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
@@ -4837,7 +4979,8 @@ float* makeSomeTechno() {
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
       saw6f(chordPhase3 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1, 3.0f) * chordHit;
     chord = chord + processDelay(chord, 0.375f) * 0.4f; // Dotted 8th delay
 
@@ -4849,7 +4992,7 @@ float* makeSomeTechno() {
 
 ```
 
-```c 91
+```c 94
 
 // Audio Processing code in C
 
@@ -4881,6 +5024,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -4913,7 +5058,7 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -4929,7 +5074,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordRootPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
     chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
@@ -4938,7 +5083,8 @@ float* makeSomeTechno() {
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
       saw6f(chordPhase3 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1, 3.0f) * chordHit;
     chord = chord + processDelay(chord, 0.5f, 0.375f) * 0.4f; // Dotted 8th delay
 
@@ -4950,7 +5096,7 @@ float* makeSomeTechno() {
 
 ```
 
-```c 91
+```c 94
 
 // Audio Processing code in C
 
@@ -4982,6 +5128,8 @@ float envelope(float t, float amp, float exp) {
   return env;
 }
 
+// Rhythm pattern in sixteenth notes
+// 1 = play chord, 0 = don't play chord
 const char chordPattern[16] = {
   0, 1, 0, 0,
   0, 0, 1, 0,
@@ -5014,7 +5162,7 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
     float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
     float tSixteenths = tBeats * 4.0; // Current 16th note
-    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time in 16th (0-1)
+    float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
     float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
@@ -5030,7 +5178,7 @@ float* makeSomeTechno() {
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordRootPitch = bassPitch * 4.0f; // 2 octaves above bass
+    float chordRootPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
     if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
     chordPhase1 = phasor(chordPhase1, chordRootPitch);
     chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f); // Perfect 5th
@@ -5039,7 +5187,8 @@ float* makeSomeTechno() {
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
       saw6f(chordPhase3 * TWO_PI);
-    char chordHit = chordPattern[(int)tSixteenths % 16];
+    int chordPatternIndex = (int)tSixteenths % 16; // 0-15
+    char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
     chord *= envelope(tSixteenthFrac, 0.1, 3.0f) * chordHit;
     chord = chord + processDelay(chord, 0.5f, 0.375f) * 0.4f; // Dotted 8th delay
 
