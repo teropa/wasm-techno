@@ -91,7 +91,7 @@ float saw5f(float phase) {
 
 void setStep(int step) {
   currentStep = step;
-  if (step == 20 || step == 21) {
+  if (step == 20 || step == 21 || step == 22) {
     tSamples = 0; // hear the "chord progression" from the beginning
   }
 }
@@ -100,7 +100,7 @@ float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR;
     float tBeats = tSeconds * 2.0f; // 120 BPM
-    float bar = tBeats / 4.0f; // Current bar (in 4/4 time)
+    int bar = tBeats / 4.0f; // Current bar (in 4/4 time)
     float tBeatFrac = tBeats - trunc(tBeats);
     float tSixteenths = tBeats * 4.0f;
     int sixteenth = (int)tSixteenths % 16;
@@ -421,7 +421,7 @@ float* makeSomeTechno() {
 
       // Chords
       float chordRootPitch = bassPitch * 4.0f;
-      if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
+      if (bar % 4 == 2 || bar % 4 == 3) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
       chordPhase1 = phasor(chordPhase1, chordRootPitch);
       chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f);
       chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f);
@@ -447,7 +447,7 @@ float* makeSomeTechno() {
 
       // Chords
       float chordRootPitch = bassPitch * 4.0f;
-      if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
+      if (bar % 4 == 2 || bar % 4 == 3) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
       chordPhase1 = phasor(chordPhase1, chordRootPitch);
       chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f);
       chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f);
@@ -474,7 +474,7 @@ float* makeSomeTechno() {
 
       // Chords
       float chordRootPitch = bassPitch * 4.0f;
-      if (fmodf(bar, 4.0f) >= 2.0f) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
+      if (bar % 4 == 2 || bar % 4 == 3) chordRootPitch *= 2.0f/3.0f; // Perfect 5th down
       chordPhase1 = phasor(chordPhase1, chordRootPitch);
       chordPhase2 = phasor(chordPhase2, chordRootPitch * 3.0f/2.0f);
       chordPhase3 = phasor(chordPhase3, chordRootPitch * 6.0f/5.0f);
