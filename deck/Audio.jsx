@@ -82,7 +82,7 @@ export const Audio = ({ versions }) => {
       style={{
         position: "absolute",
         right: 20,
-        bottom: 20,
+        top: "-9%",
         width: "30%",
         height: "35%",
       }}

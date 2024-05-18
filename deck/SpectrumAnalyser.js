@@ -58,7 +58,7 @@ export class SpectrumAnalyser {
     }
     path.lineTo(w, h);
 
-    ctx.fillStyle = "rgba(255, 255, 255, 0.75)";
+    ctx.fillStyle = "rgba(225, 255, 225, 0.75)";
     ctx.fill(path);
   }
 
