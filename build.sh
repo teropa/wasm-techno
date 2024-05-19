@@ -3,5 +3,5 @@ emcc \
   -O3 \
   -s WASM=1 \
   -s EXPORTED_FUNCTIONS=_makeSomeTechno \
-  -o deck/static/techno.wasm \
+  -o techno.wasm \
   techno.c

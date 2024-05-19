@@ -9,21 +9,17 @@
       let ctx = new AudioContext({ sampleRate: 48000 });
       await ctx.resume();
 
-      await ctx.audioWorklet.addModule("deck/static/TechnoProcessor.js");
+      await ctx.audioWorklet.addModule("TechnoProcessor.js");
       let worklet = new AudioWorkletNode(ctx, "techno-processor");
-      worklet.connect(ctx.destination);
 
-      let wasmCode = await fetch("deck/static/techno.wasm").then((r) =>
-        r.arrayBuffer()
-      );
+      let wasmCode = await fetch("techno.wasm").then((r) => r.arrayBuffer());
       worklet.port.postMessage({
-        cmd: "init",
         wasmCode,
-        version: "makeSomeTechno",
       });
 
       let weq8 = new WEQ8Runtime(ctx);
       worklet.connect(weq8.input);
+      weq8.output.connect(ctx.destination);
       document.querySelector("weq8-ui").runtime = weq8;
     }
     document
