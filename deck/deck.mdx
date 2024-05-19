@@ -640,8 +640,8 @@ float kickPhase = 0.0f; // Accumulate phase over time
 float* makeSomeTechno() {
   // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     outputBuffer[i] = 0.0f;
   }
   // Return pointer to the array
@@ -673,8 +673,8 @@ float kickPhase = 0.0f; // Accumulate phase over time
 float* makeSomeTechno() {
   // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     outputBuffer[i] = 0.0f;
   }
@@ -707,8 +707,8 @@ float kickPhase = 0.0f; // Accumulate phase over time
 float* makeSomeTechno() {
   // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= 0.15f; // Make it less loud
 
@@ -743,8 +743,8 @@ float kickPhase = 0.0f; // Accumulate phase over time
 float* makeSomeTechno() {
   // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= 0.15f; // Make it less loud
 
@@ -779,8 +779,8 @@ float kickPhase = 0.0f; // Accumulate phase over time
 float* makeSomeTechno() {
   // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= 0.15f; // Make it less loud
 
@@ -815,8 +815,8 @@ float kickPhase = 0.0f; // Accumulate phase over time
 float* makeSomeTechno() {
   // Process 128 samples into the array
   for (int i = 0; i < 128; i++) {
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= 0.15f; // Make it less loud
 
@@ -854,8 +854,8 @@ float* makeSomeTechno() {
   for (int i = 0; i < 128; i++) {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
 
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= 0.15f; // Make it less loud
 
@@ -894,8 +894,8 @@ float* makeSomeTechno() {
     float tSeconds = tSamples++ * SAMPLE_DUR; // Current time
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
 
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= 0.15f; // Make it less loud
 
@@ -935,8 +935,8 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= 0.15f; // Make it less loud
 
@@ -979,8 +979,8 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
 
     outputBuffer[i] = kick; // Output
@@ -1023,8 +1023,8 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
 
     outputBuffer[i] = kick; // Output
@@ -1069,8 +1069,8 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
 
     outputBuffer[i] = kick; // Output
@@ -1115,8 +1115,8 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f); // Shape the amplitude
 
@@ -1162,8 +1162,8 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f); // Shape the amplitude
 
@@ -1209,8 +1209,8 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
@@ -1256,8 +1256,8 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
@@ -1303,8 +1303,8 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
-    float kickPitch = 200.0f; // Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 200.0f; // Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
@@ -1350,8 +1350,8 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
-    float kickPitch = 50.0f + envelope(tBeatFrac, 200.0f, 3.0f); // Pitch decay 250->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 200.0f, 3.0f); // Freq decay 250->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
@@ -1397,8 +1397,8 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
-    float kickPitch = 50.0f + envelope(tBeatFrac, 200.0f, 3.0f); // Pitch decay 250->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 200.0f, 3.0f); // Freq decay 250->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
@@ -1444,8 +1444,8 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
@@ -1491,8 +1491,8 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
@@ -1538,8 +1538,8 @@ float* makeSomeTechno() {
     float tBeats = tSeconds * 2.0f; // Current beat @ 120 BPM
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
@@ -1586,14 +1586,14 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass *= 0.2f; // Amplitude
 
@@ -1640,14 +1640,14 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass *= 0.2f; // Amplitude
 
@@ -1694,14 +1694,14 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass *= 0.2f; // Amplitude
 
@@ -1748,14 +1748,14 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass); // Saturation
     bass *= 0.2f; // Amplitude
@@ -1803,14 +1803,14 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass); // Saturation
     bass *= 0.2f; // Amplitude
@@ -1858,14 +1858,14 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= 0.2f; // Amplitude
@@ -1913,14 +1913,14 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= 0.2f; // Amplitude
@@ -1968,14 +1968,14 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= 0.2f; // Amplitude
@@ -2023,14 +2023,14 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 3.0f)); // "Sidechaining"
@@ -2078,14 +2078,14 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 3.0f)); // "Sidechaining"
@@ -2133,14 +2133,14 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
@@ -2188,14 +2188,14 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
@@ -2243,21 +2243,21 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = sinf(chordPhase * TWO_PI);
     chord *= envelope(tBeatFrac, 0.1f, 3.0f);
 
@@ -2304,21 +2304,21 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = sinf(chordPhase * TWO_PI);
     chord *= envelope(tBeatFrac, 0.1f, 3.0f);
 
@@ -2365,21 +2365,21 @@ float* makeSomeTechno() {
     float tBeatFrac = tBeats - trunc(tBeats); // Time within beat (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = sinf(chordPhase * TWO_PI);
     chord *= envelope(tBeatFrac, 0.1f, 3.0f);
 
@@ -2428,21 +2428,21 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = sinf(chordPhase * TWO_PI);
     chord *= envelope(tBeatFrac, 0.1f, 3.0f);
 
@@ -2491,21 +2491,21 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = sinf(chordPhase * TWO_PI);
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f);
 
@@ -2554,21 +2554,21 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = sinf(chordPhase * TWO_PI);
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f);
 
@@ -2626,21 +2626,21 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = sinf(chordPhase * TWO_PI);
     chord *= envelope(tSixteenthFrac, 0.1f, 3.0f);
 
@@ -2698,21 +2698,21 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = sinf(chordPhase * TWO_PI);
     int chordPatternIndex = (int)tSixteenths % 16; // 0-15
     char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
@@ -2772,21 +2772,21 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = sinf(chordPhase * TWO_PI);
     int chordPatternIndex = (int)tSixteenths % 16; // 0-15
     char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
@@ -2846,21 +2846,21 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = sinf(chordPhase * TWO_PI);
     int chordPatternIndex = (int)tSixteenths % 16; // 0-15
     char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
@@ -2920,21 +2920,21 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = saw6f(chordPhase * TWO_PI);
     int chordPatternIndex = (int)tSixteenths % 16; // 0-15
     char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
@@ -3000,21 +3000,21 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = saw6f(chordPhase * TWO_PI);
     int chordPatternIndex = (int)tSixteenths % 16; // 0-15
     char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
@@ -3082,21 +3082,21 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = saw6f(chordPhase * TWO_PI);
     int chordPatternIndex = (int)tSixteenths % 16; // 0-15
     char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
@@ -3164,21 +3164,21 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = saw6f(chordPhase * TWO_PI);
     int chordPatternIndex = (int)tSixteenths % 16; // 0-15
     char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
@@ -3246,21 +3246,21 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = saw6f(chordPhase * TWO_PI);
     int chordPatternIndex = (int)tSixteenths % 16; // 0-15
     char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
@@ -3329,21 +3329,21 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = saw6f(chordPhase * TWO_PI);
     int chordPatternIndex = (int)tSixteenths % 16; // 0-15
     char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
@@ -3413,21 +3413,21 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = saw6f(chordPhase * TWO_PI);
     int chordPatternIndex = (int)tSixteenths % 16; // 0-15
     char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
@@ -3498,21 +3498,21 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = saw6f(chordPhase * TWO_PI);
     int chordPatternIndex = (int)tSixteenths % 16; // 0-15
     char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
@@ -3584,21 +3584,21 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = saw6f(chordPhase * TWO_PI);
     int chordPatternIndex = (int)tSixteenths % 16; // 0-15
     char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
@@ -3670,21 +3670,21 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = saw6f(chordPhase * TWO_PI);
     int chordPatternIndex = (int)tSixteenths % 16; // 0-15
     char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
@@ -3756,21 +3756,21 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase = phasor(chordPhase, chordPitch);
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase = phasor(chordPhase, chordFreq);
     float chord = saw6f(chordPhase * TWO_PI);
     int chordPatternIndex = (int)tSixteenths % 16; // 0-15
     char chordHit = chordPattern[chordPatternIndex]; // 0 or 1 if chord should play
@@ -3843,22 +3843,22 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase1 = phasor(chordPhase1, chordPitch);
-    chordPhase2 = phasor(chordPhase2, chordPitch * 3.0f/2.0f); // Perfect 5th
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase1 = phasor(chordPhase1, chordFreq);
+    chordPhase2 = phasor(chordPhase2, chordFreq * 3.0f/2.0f); // Perfect 5th
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI);
@@ -3933,22 +3933,22 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase1 = phasor(chordPhase1, chordPitch);
-    chordPhase2 = phasor(chordPhase2, chordPitch * 3.0f/2.0f); // Perfect 5th
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase1 = phasor(chordPhase1, chordFreq);
+    chordPhase2 = phasor(chordPhase2, chordFreq * 3.0f/2.0f); // Perfect 5th
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI);
@@ -4023,23 +4023,23 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase1 = phasor(chordPhase1, chordPitch);
-    chordPhase2 = phasor(chordPhase2, chordPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordPitch * 6.0f/5.0f); // Minor 3rd
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase1 = phasor(chordPhase1, chordFreq);
+    chordPhase2 = phasor(chordPhase2, chordFreq * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordFreq * 6.0f/5.0f); // Minor 3rd
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
@@ -4115,23 +4115,23 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase1 = phasor(chordPhase1, chordPitch);
-    chordPhase2 = phasor(chordPhase2, chordPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordPitch * 6.0f/5.0f); // Minor 3rd
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase1 = phasor(chordPhase1, chordFreq);
+    chordPhase2 = phasor(chordPhase2, chordFreq * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordFreq * 6.0f/5.0f); // Minor 3rd
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
@@ -4207,23 +4207,23 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase1 = phasor(chordPhase1, chordPitch);
-    chordPhase2 = phasor(chordPhase2, chordPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordPitch * 6.0f/5.0f); // Minor 3rd
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase1 = phasor(chordPhase1, chordFreq);
+    chordPhase2 = phasor(chordPhase2, chordFreq * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordFreq * 6.0f/5.0f); // Minor 3rd
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
@@ -4300,23 +4300,23 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    chordPhase1 = phasor(chordPhase1, chordPitch);
-    chordPhase2 = phasor(chordPhase2, chordPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordPitch * 6.0f/5.0f); // Minor 3rd
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    chordPhase1 = phasor(chordPhase1, chordFreq);
+    chordPhase2 = phasor(chordPhase2, chordFreq * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordFreq * 6.0f/5.0f); // Minor 3rd
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
@@ -4393,24 +4393,24 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    if (bar % 4 == 2 || bar % 4 == 3) chordPitch *= 2.0f/3.0f; // Perfect 5th down
-    chordPhase1 = phasor(chordPhase1, chordPitch);
-    chordPhase2 = phasor(chordPhase2, chordPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordPitch * 6.0f/5.0f); // Minor 3rd
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    if (bar % 4 == 2 || bar % 4 == 3) chordFreq *= 2.0f/3.0f; // Perfect 5th down
+    chordPhase1 = phasor(chordPhase1, chordFreq);
+    chordPhase2 = phasor(chordPhase2, chordFreq * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordFreq * 6.0f/5.0f); // Minor 3rd
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
@@ -4487,24 +4487,24 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    if (bar % 4 == 2 || bar % 4 == 3) chordPitch *= 2.0f/3.0f; // Perfect 5th down
-    chordPhase1 = phasor(chordPhase1, chordPitch);
-    chordPhase2 = phasor(chordPhase2, chordPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordPitch * 6.0f/5.0f); // Minor 3rd
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    if (bar % 4 == 2 || bar % 4 == 3) chordFreq *= 2.0f/3.0f; // Perfect 5th down
+    chordPhase1 = phasor(chordPhase1, chordFreq);
+    chordPhase2 = phasor(chordPhase2, chordFreq * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordFreq * 6.0f/5.0f); // Minor 3rd
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
@@ -4584,24 +4584,24 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    if (bar % 4 == 2 || bar % 4 == 3) chordPitch *= 2.0f/3.0f; // Perfect 5th down
-    chordPhase1 = phasor(chordPhase1, chordPitch);
-    chordPhase2 = phasor(chordPhase2, chordPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordPitch * 6.0f/5.0f); // Minor 3rd
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    if (bar % 4 == 2 || bar % 4 == 3) chordFreq *= 2.0f/3.0f; // Perfect 5th down
+    chordPhase1 = phasor(chordPhase1, chordFreq);
+    chordPhase2 = phasor(chordPhase2, chordFreq * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordFreq * 6.0f/5.0f); // Minor 3rd
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
@@ -4683,24 +4683,24 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    if (bar % 4 == 2 || bar % 4 == 3) chordPitch *= 2.0f/3.0f; // Perfect 5th down
-    chordPhase1 = phasor(chordPhase1, chordPitch);
-    chordPhase2 = phasor(chordPhase2, chordPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordPitch * 6.0f/5.0f); // Minor 3rd
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    if (bar % 4 == 2 || bar % 4 == 3) chordFreq *= 2.0f/3.0f; // Perfect 5th down
+    chordPhase1 = phasor(chordPhase1, chordFreq);
+    chordPhase2 = phasor(chordPhase2, chordFreq * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordFreq * 6.0f/5.0f); // Minor 3rd
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
@@ -4784,24 +4784,24 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    if (bar % 4 == 2 || bar % 4 == 3) chordPitch *= 2.0f/3.0f; // Perfect 5th down
-    chordPhase1 = phasor(chordPhase1, chordPitch);
-    chordPhase2 = phasor(chordPhase2, chordPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordPitch * 6.0f/5.0f); // Minor 3rd
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    if (bar % 4 == 2 || bar % 4 == 3) chordFreq *= 2.0f/3.0f; // Perfect 5th down
+    chordPhase1 = phasor(chordPhase1, chordFreq);
+    chordPhase2 = phasor(chordPhase2, chordFreq * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordFreq * 6.0f/5.0f); // Minor 3rd
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
@@ -4886,24 +4886,24 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    if (bar % 4 == 2 || bar % 4 == 3) chordPitch *= 2.0f/3.0f; // Perfect 5th down
-    chordPhase1 = phasor(chordPhase1, chordPitch);
-    chordPhase2 = phasor(chordPhase2, chordPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordPitch * 6.0f/5.0f); // Minor 3rd
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    if (bar % 4 == 2 || bar % 4 == 3) chordFreq *= 2.0f/3.0f; // Perfect 5th down
+    chordPhase1 = phasor(chordPhase1, chordFreq);
+    chordPhase2 = phasor(chordPhase2, chordFreq * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordFreq * 6.0f/5.0f); // Minor 3rd
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
@@ -4989,24 +4989,24 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    if (bar % 4 == 2 || bar % 4 == 3) chordPitch *= 2.0f/3.0f; // Perfect 5th down
-    chordPhase1 = phasor(chordPhase1, chordPitch);
-    chordPhase2 = phasor(chordPhase2, chordPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordPitch * 6.0f/5.0f); // Minor 3rd
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    if (bar % 4 == 2 || bar % 4 == 3) chordFreq *= 2.0f/3.0f; // Perfect 5th down
+    chordPhase1 = phasor(chordPhase1, chordFreq);
+    chordPhase2 = phasor(chordPhase2, chordFreq * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordFreq * 6.0f/5.0f); // Minor 3rd
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
@@ -5093,24 +5093,24 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    if (bar % 4 == 2 || bar % 4 == 3) chordPitch *= 2.0f/3.0f; // Perfect 5th down
-    chordPhase1 = phasor(chordPhase1, chordPitch);
-    chordPhase2 = phasor(chordPhase2, chordPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordPitch * 6.0f/5.0f); // Minor 3rd
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    if (bar % 4 == 2 || bar % 4 == 3) chordFreq *= 2.0f/3.0f; // Perfect 5th down
+    chordPhase1 = phasor(chordPhase1, chordFreq);
+    chordPhase2 = phasor(chordPhase2, chordFreq * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordFreq * 6.0f/5.0f); // Minor 3rd
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
@@ -5197,24 +5197,24 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    if (bar % 4 == 2 || bar % 4 == 3) chordPitch *= 2.0f/3.0f; // Perfect 5th down
-    chordPhase1 = phasor(chordPhase1, chordPitch);
-    chordPhase2 = phasor(chordPhase2, chordPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordPitch * 6.0f/5.0f); // Minor 3rd
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    if (bar % 4 == 2 || bar % 4 == 3) chordFreq *= 2.0f/3.0f; // Perfect 5th down
+    chordPhase1 = phasor(chordPhase1, chordFreq);
+    chordPhase2 = phasor(chordPhase2, chordFreq * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordFreq * 6.0f/5.0f); // Minor 3rd
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
@@ -5302,24 +5302,24 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    if (bar % 4 == 2 || bar % 4 == 3) chordPitch *= 2.0f/3.0f; // Perfect 5th down
-    chordPhase1 = phasor(chordPhase1, chordPitch);
-    chordPhase2 = phasor(chordPhase2, chordPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordPitch * 6.0f/5.0f); // Minor 3rd
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    if (bar % 4 == 2 || bar % 4 == 3) chordFreq *= 2.0f/3.0f; // Perfect 5th down
+    chordPhase1 = phasor(chordPhase1, chordFreq);
+    chordPhase2 = phasor(chordPhase2, chordFreq * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordFreq * 6.0f/5.0f); // Minor 3rd
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
@@ -5408,24 +5408,24 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    if (bar % 4 == 2 || bar % 4 == 3) chordPitch *= 2.0f/3.0f; // Perfect 5th down
-    chordPhase1 = phasor(chordPhase1, chordPitch);
-    chordPhase2 = phasor(chordPhase2, chordPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordPitch * 6.0f/5.0f); // Minor 3rd
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    if (bar % 4 == 2 || bar % 4 == 3) chordFreq *= 2.0f/3.0f; // Perfect 5th down
+    chordPhase1 = phasor(chordPhase1, chordFreq);
+    chordPhase2 = phasor(chordPhase2, chordFreq * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordFreq * 6.0f/5.0f); // Minor 3rd
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
@@ -5514,24 +5514,24 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    if (bar % 4 == 2 || bar % 4 == 3) chordPitch *= 2.0f/3.0f; // Perfect 5th down
-    chordPhase1 = phasor(chordPhase1, chordPitch);
-    chordPhase2 = phasor(chordPhase2, chordPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordPitch * 6.0f/5.0f); // Minor 3rd
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    if (bar % 4 == 2 || bar % 4 == 3) chordFreq *= 2.0f/3.0f; // Perfect 5th down
+    chordPhase1 = phasor(chordPhase1, chordFreq);
+    chordPhase2 = phasor(chordPhase2, chordFreq * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordFreq * 6.0f/5.0f); // Minor 3rd
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
@@ -5620,24 +5620,24 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    if (bar % 4 == 2 || bar % 4 == 3) chordPitch *= 2.0f/3.0f; // Perfect 5th down
-    chordPhase1 = phasor(chordPhase1, chordPitch);
-    chordPhase2 = phasor(chordPhase2, chordPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordPitch * 6.0f/5.0f); // Minor 3rd
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    if (bar % 4 == 2 || bar % 4 == 3) chordFreq *= 2.0f/3.0f; // Perfect 5th down
+    chordPhase1 = phasor(chordPhase1, chordFreq);
+    chordPhase2 = phasor(chordPhase2, chordFreq * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordFreq * 6.0f/5.0f); // Minor 3rd
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
@@ -5726,24 +5726,24 @@ float* makeSomeTechno() {
     float tSixteenthFrac = tSixteenths - trunc(tSixteenths); // Time within 16th (0-1)
 
     // Kick
-    float kickPitch = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Pitch decay 950->50Hz
-    kickPhase = phasor(kickPhase, kickPitch);
+    float kickFreq = 50.0f + envelope(tBeatFrac, 900.0f, 50.0f); // Freq decay 950->50Hz
+    kickPhase = phasor(kickPhase, kickFreq);
     float kick = sin(kickPhase * TWO_PI); // Sine wave
     kick *= envelope(tBeatFrac, 0.15f, 3.0f); // Shape the amplitude
 
     // Bass
-    float bassPitch = 50.0f; // Hz
-    bassPhase = phasor(bassPhase, bassPitch);
+    float bassFreq = 50.0f; // Hz
+    bassPhase = phasor(bassPhase, bassFreq);
     float bass = sinf(bassPhase * TWO_PI); // Sine wave
     bass = tanh(bass * 1.5f); // More saturation
     bass *= (0.2f - envelope(tBeatFrac, 0.2f, 0.5f)); // "Sidechaining"
 
     // Chords
-    float chordPitch = bassPitch * 4.0f; // 200Hz, 2 octaves above bass
-    if (bar % 4 == 2 || bar % 4 == 3) chordPitch *= 2.0f/3.0f; // Perfect 5th down
-    chordPhase1 = phasor(chordPhase1, chordPitch);
-    chordPhase2 = phasor(chordPhase2, chordPitch * 3.0f/2.0f); // Perfect 5th
-    chordPhase3 = phasor(chordPhase3, chordPitch * 6.0f/5.0f); // Minor 3rd
+    float chordFreq = bassFreq * 4.0f; // 200Hz, 2 octaves above bass
+    if (bar % 4 == 2 || bar % 4 == 3) chordFreq *= 2.0f/3.0f; // Perfect 5th down
+    chordPhase1 = phasor(chordPhase1, chordFreq);
+    chordPhase2 = phasor(chordPhase2, chordFreq * 3.0f/2.0f); // Perfect 5th
+    chordPhase3 = phasor(chordPhase3, chordFreq * 6.0f/5.0f); // Minor 3rd
     float chord =
       saw6f(chordPhase1 * TWO_PI) +
       saw6f(chordPhase2 * TWO_PI) +
