@@ -4,7 +4,9 @@
   "description": "",
   "scripts": {
     "deck:start": "mdx-deck -p 9000 deck/deck.mdx",
+    "deck:standalone:start": "mdx-deck -p 9000 deck/standaloneDeck.mdx",
     "deck:build": "mdx-deck build deck/deck.mdx",
+    "deck:standalone:build": "mdx-deck build deck/standaloneDeck.mdx",
     "build": "emcc --no-entry -O3 -s WASM=1 -s EXPORTED_FUNCTIONS=_makeSomeTechno -o techno.wasm techno.c"
   },
   "author": "Tero Parviainen <tero@teropa.info>",

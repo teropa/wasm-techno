@@ -89,9 +89,9 @@ float saw5f(float phase) {
     sinf(phase * 5.0f) * 0.2f;
 }
 
-void setStep(int step) {
+void setStep(int step, int reset) {
   currentStep = step;
-  if (step == 20 || step == 21 || step == 22) {
+  if (reset) {
     tSamples = 0; // hear the "chord progression" from the beginning
   }
 }

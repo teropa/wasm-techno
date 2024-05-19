@@ -2,7 +2,7 @@ class TechnoProcessor extends AudioWorkletProcessor {
   constructor() {
     super();
     this.gone = false;
-    this.port.onmessage = async ({ data: { cmd, wasmCode, step } }) => {
+    this.port.onmessage = async ({ data: { cmd, wasmCode, step, reset } }) => {
       if (cmd === "init") {
         let {
           instance: { exports },
@@ -11,7 +11,7 @@ class TechnoProcessor extends AudioWorkletProcessor {
         this.mem = this.wasm.memory.buffer;
         this.wasm._initialize();
       } else if (cmd === "setStep") {
-        this.wasm?.setStep(step);
+        this.wasm?.setStep(step, reset);
       } else if (cmd === "destroy") {
         this.gone = true;
       }

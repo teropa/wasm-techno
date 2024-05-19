@@ -76,10 +76,10 @@ export const Audio = ({ versions }) => {
     let version = versions[step];
     if (!audioRef.current.processor || !audioRef.current.gain) return;
     let { audioContext } = getCtx();
-    if (typeof version === "number") {
+    if (version) {
       audioRef.current.processor.port.postMessage({
         cmd: "setStep",
-        step: version,
+        ...version,
       });
       if (!audioRef.current.on) {
         audioRef.current.gain.gain.setValueAtTime(
