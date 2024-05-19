@@ -4565,7 +4565,7 @@ const char chordPattern[16] = {
 };
 
 // Ring buffer delay line
-float delayLine[SAMPLERATE] = {0}; // 48000 = 1 second of samples
+float delayLine[(int)SAMPLERATE] = {0}; // 48000 = 1 second of samples
 
 static float outputBuffer[128]; // Array of samples
 
@@ -4662,7 +4662,7 @@ const char chordPattern[16] = {
 };
 
 // Ring buffer delay line
-float delayLine[SAMPLERATE] = {0}; // 48000 = 1 second of samples
+float delayLine[(int)SAMPLERATE] = {0}; // 48000 = 1 second of samples
 float processDelay(float input, float delayTime) {
 }
 
@@ -4761,7 +4761,7 @@ const char chordPattern[16] = {
 };
 
 // Ring buffer delay line
-float delayLine[SAMPLERATE] = {0}; // 48000 = 1 second of samples
+float delayLine[(int)SAMPLERATE] = {0}; // 48000 = 1 second of samples
 int delayIndex = 0;
 float processDelay(float input, float delayTime) {
   delayLine[delayIndex] = input; // Write current input
@@ -4862,7 +4862,7 @@ const char chordPattern[16] = {
 };
 
 // Ring buffer delay line
-float delayLine[SAMPLERATE] = {0}; // 48000 = 1 second of samples
+float delayLine[(int)SAMPLERATE] = {0}; // 48000 = 1 second of samples
 int delayIndex = 0;
 float processDelay(float input, float delayTime) {
   delayLine[delayIndex] = input; // Write current input
@@ -4964,7 +4964,7 @@ const char chordPattern[16] = {
 };
 
 // Ring buffer delay line
-float delayLine[SAMPLERATE] = {0}; // 48000 = 1 second of samples
+float delayLine[(int)SAMPLERATE] = {0}; // 48000 = 1 second of samples
 int delayIndex = 0;
 float processDelay(float input, float delayTime) {
   delayLine[delayIndex] = input; // Write current input
@@ -5067,7 +5067,7 @@ const char chordPattern[16] = {
 };
 
 // Ring buffer delay line
-float delayLine[SAMPLERATE] = {0}; // 48000 = 1 second of samples
+float delayLine[(int)SAMPLERATE] = {0}; // 48000 = 1 second of samples
 int delayIndex = 0;
 float processDelay(float input, float delayTime) {
   delayLine[delayIndex] = input; // Write current input
@@ -5171,7 +5171,7 @@ const char chordPattern[16] = {
 };
 
 // Ring buffer delay line
-float delayLine[SAMPLERATE] = {0}; // 48000 = 1 second of samples
+float delayLine[(int)SAMPLERATE] = {0}; // 48000 = 1 second of samples
 int delayIndex = 0;
 float processDelay(float input, float delayTime) {
   delayLine[delayIndex] = input; // Write current input
@@ -5276,7 +5276,7 @@ const char chordPattern[16] = {
 };
 
 // Ring buffer delay line
-float delayLine[SAMPLERATE] = {0}; // Store max 1 second of samples
+float delayLine[(int)SAMPLERATE] = {0}; // Store max 1 second of samples
 int delayIndex = 0;
 float processDelay(float input, float delayTime) {
   delayLine[delayIndex] = input; // Write current input
@@ -5381,7 +5381,7 @@ const char chordPattern[16] = {
 };
 
 // Ring buffer delay line
-float delayLine[SAMPLERATE] = {0}; // Store max 1 second of samples
+float delayLine[(int)SAMPLERATE] = {0}; // Store max 1 second of samples
 int delayIndex = 0;
 float processDelay(float input, float feedback, float delayTime) {
   // Write current input retaining some of the previous output as feedback
@@ -5487,7 +5487,7 @@ const char chordPattern[16] = {
 };
 
 // Ring buffer delay line
-float delayLine[SAMPLERATE] = {0}; // Store max 1 second of samples
+float delayLine[(int)SAMPLERATE] = {0}; // Store max 1 second of samples
 int delayIndex = 0;
 float processDelay(float input, float feedback, float delayTime) {
   // Write current input retaining some of the previous output as feedback
@@ -5593,7 +5593,7 @@ const char chordPattern[16] = {
 };
 
 // Ring buffer delay line
-float delayLine[SAMPLERATE] = {0}; // Store max 1 second of samples
+float delayLine[(int)SAMPLERATE] = {0}; // Store max 1 second of samples
 int delayIndex = 0;
 float processDelay(float input, float feedback, float delayTime) {
   // Write current input retaining some of the previous output as feedback
@@ -5699,7 +5699,7 @@ const char chordPattern[16] = {
 };
 
 // Ring buffer delay line
-float delayLine[SAMPLERATE] = {0}; // Store max 1 second of samples
+float delayLine[(int)SAMPLERATE] = {0}; // Store max 1 second of samples
 int delayIndex = 0;
 float processDelay(float input, float feedback, float delayTime) {
   // Write current input retaining some of the previous output as feedback
