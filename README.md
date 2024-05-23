@@ -1,6 +1,8 @@
 # Making Minimal Techno with WebAssembly And a C Compiler
 
-Code and slides from my [JSHeroes 2024](https://jsheroes.io/) presentation.
+Code for my [JSHeroes 2024](https://jsheroes.io/) presentation.
+
+***View the presentation [here](https://wasmtechno.teropa.info/)***.
 
 ## Running the example
 
